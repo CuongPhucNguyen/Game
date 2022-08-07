@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90052687289F76230074898F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90052686289F76230074898F /* Player.swift */; };
+		9005268A289F76470074898F /* PlayerObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90052689289F76470074898F /* PlayerObject.swift */; };
+		9005268D289F76830074898F /* DragTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9005268C289F76830074898F /* DragTest.swift */; };
 		90A6A213289F644800892261 /* GameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A212289F644800892261 /* GameApp.swift */; };
 		90A6A215289F644800892261 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A214289F644800892261 /* ContentView.swift */; };
 		90A6A217289F644900892261 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A6A216289F644900892261 /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90052686289F76230074898F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		90052689289F76470074898F /* PlayerObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObject.swift; sourceTree = "<group>"; };
+		9005268C289F76830074898F /* DragTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTest.swift; sourceTree = "<group>"; };
 		90A6A20F289F644800892261 /* Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A6A212289F644800892261 /* GameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameApp.swift; sourceTree = "<group>"; };
 		90A6A214289F644800892261 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +77,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90052682289F75E70074898F /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				90052686289F76230074898F /* Player.swift */,
+				90052689289F76470074898F /* PlayerObject.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		90052683289F75F60074898F /* NPCs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NPCs;
+			sourceTree = "<group>";
+		};
+		90052684289F76080074898F /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				9005268C289F76830074898F /* DragTest.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		90052685289F76100074898F /* Obstacles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Obstacles;
+			sourceTree = "<group>";
+		};
+		9005268B289F766A0074898F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		90A6A206289F644800892261 = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +138,10 @@
 		90A6A211289F644800892261 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				9005268B289F766A0074898F /* Resources */,
 				90A6A212289F644800892261 /* GameApp.swift */,
 				90A6A214289F644800892261 /* ContentView.swift */,
+				90A6A23C289F645E00892261 /* Objects */,
 				90A6A216289F644900892261 /* Assets.xcassets */,
 				90A6A218289F644900892261 /* Preview Content */,
 			);
@@ -125,6 +171,17 @@
 				90A6A22F289F644A00892261 /* GameUITestsLaunchTests.swift */,
 			);
 			path = GameUITests;
+			sourceTree = "<group>";
+		};
+		90A6A23C289F645E00892261 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				90052685289F76100074898F /* Obstacles */,
+				90052684289F76080074898F /* Environment */,
+				90052683289F75F60074898F /* NPCs */,
+				90052682289F75E70074898F /* Player */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +315,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				90A6A215289F644800892261 /* ContentView.swift in Sources */,
+				9005268A289F76470074898F /* PlayerObject.swift in Sources */,
+				9005268D289F76830074898F /* DragTest.swift in Sources */,
+				90052687289F76230074898F /* Player.swift in Sources */,
 				90A6A213289F644800892261 /* GameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
