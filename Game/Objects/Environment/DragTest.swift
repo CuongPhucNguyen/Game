@@ -25,11 +25,34 @@ struct DragTest: View {
         prevMouse = MouseVectA
         currentMouse = MouseVectB
      
-        CenVectA = 
+        prevPos = CenVectA
+        offset = CenVectB
+     
+     
+        MouseVectB - MouseVectA = CenVectB - CenVectA
+        => CenVectB = (MouseVectB - MouseVectA) + CenVectA
+        
+     
+        Replace the variables, we have:
+        offset = (currentMouse - prevMouse) + prevPos
+        
+     
      
      
      this eliminates the user's human error and allows the player to use visual cues such as the blue dot as the current position and the red dot as the charging slingshot for accurate aiming
     
+     
+     Hypothetically, the slingshot once released shoot the object 1.5 times the pull distance, we have:
+     
+     +slingshot trajectory goes the opposite way, therefore the vector goes the opposite direction:
+     
+    => (actual placement after release) = prevPos - (currentMouse - prevMouse)*1.5
+     
+     
+     since the circle takes the value of the "offset" value and the "offset" value is no longer used once the user release the button, we can use the "offset" value to store the "actual placement after released" value to update the location of the circle as well as save memory
+     
+     
+     
     
     
     
