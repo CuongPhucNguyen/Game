@@ -16,6 +16,7 @@ struct Environment : View {
         Rectangle()
             .frame(width: abs(environment.xEnd - environment.xStart), height: abs(environment.yEnd - environment.yStart), alignment: environment.objectAlignment)
             .offset(x: environment.offsetX, y: environment.offsetY)
+            .foregroundColor(.gray)
     }
 
     init(environment: EnvironmentObject){
@@ -25,7 +26,7 @@ struct Environment : View {
 
 struct preview: PreviewProvider{
     static var previews: some View{
-        Environment(environment: EnvironmentObject.init(xStart: 0, xEnd: 0, yStart: 50, yEnd: 50, alignment: Alignment.center))
+        Environment(environment: EnvironmentObject.init(xStart: 0, xEnd: 0, yStart: 50, yEnd: 50, alignment: Alignment.center, id: 1))
     }
 }
 
