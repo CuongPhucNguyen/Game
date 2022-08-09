@@ -17,6 +17,9 @@
 		90A6A224289F644A00892261 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A223289F644A00892261 /* GameTests.swift */; };
 		90A6A22E289F644A00892261 /* GameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A22D289F644A00892261 /* GameUITests.swift */; };
 		90A6A230289F644A00892261 /* GameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A22F289F644A00892261 /* GameUITestsLaunchTests.swift */; };
+		90DBF43A28A25F0A00F9EF05 /* EnvironmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */; };
+		90DBF43C28A2624E00F9EF05 /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */; };
+		90DBF43E28A262F900F9EF05 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43D28A262F900F9EF05 /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		90A6A229289F644A00892261 /* GameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A6A22D289F644A00892261 /* GameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUITests.swift; sourceTree = "<group>"; };
 		90A6A22F289F644A00892261 /* GameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentObject.swift; sourceTree = "<group>"; };
+		90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
+		90DBF43D28A262F900F9EF05 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				9005268C289F76830074898F /* DragTest.swift */,
+				90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */,
+				90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */,
+				90DBF43D28A262F900F9EF05 /* Environment.swift */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -314,10 +323,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90DBF43A28A25F0A00F9EF05 /* EnvironmentObject.swift in Sources */,
+				90DBF43E28A262F900F9EF05 /* Environment.swift in Sources */,
 				90A6A215289F644800892261 /* ContentView.swift in Sources */,
 				9005268A289F76470074898F /* PlayerObject.swift in Sources */,
 				9005268D289F76830074898F /* DragTest.swift in Sources */,
 				90052687289F76230074898F /* Player.swift in Sources */,
+				90DBF43C28A2624E00F9EF05 /* EnvironmentManager.swift in Sources */,
 				90A6A213289F644800892261 /* GameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

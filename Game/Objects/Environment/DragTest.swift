@@ -67,6 +67,7 @@ struct DragTest: View {
     @State var prevMouse: CGSize = CGSize.zero
     @State var currentMouse: CGSize = CGSize.zero
     @State var onClick: Bool = false
+    @Binding var changing: Bool
 
     // whether it is currently being dragged or not
     @State private var isDragging = false
@@ -87,12 +88,12 @@ struct DragTest: View {
                     
                 }
                 .onEnded { value in
-                    withAnimation {
+                    withAnimation (.easeOut(duration:0.3)) {
+                        changing = true
                         isDragging = false
                         offset = CGSize(width:prevPos.width - ( value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height))
                         accumulated = offset
                         onClick = false
-                        
                     }
                 }
             // a combined gesture that forces the user to long press then drag
@@ -115,14 +116,6 @@ struct DragTest: View {
             }
             
         }
-//        .onChange(of: inertia)
-//            { newChange in
-//                withAnimation{
-//                    offset = CGSize(width: prevPos.width-accumulated.width*2, height:prevPos.height-accumulated.height*2)
-//                    accumulated = offset
-//                    inertia = false
-//                }
-//            }
             
     }
 }
@@ -130,8 +123,10 @@ struct DragTest: View {
 
 
 
-struct preview: PreviewProvider{
-    static var previews: some View{
-        DragTest()
-    }
-}
+//struct preview: PreviewProvider{
+//    @State var changing: Bool = false
+//    static var previews: some View{
+//
+//        DragTest(changing: changing)
+//    }
+//}
