@@ -11,7 +11,7 @@ import SwiftUI
 struct GameApp: App {
     var body: some Scene {
         WindowGroup {
-            EnvironmentManager(playerPosChanging: false, environmentObjectArray: [EnvironmentObject.init(xStart: 0.0, xEnd: 50, yStart: 0, yEnd: 50, alignment: Alignment.center,id: 1)])
+            EnvironmentManager(playerPosChanging: false, environmentObjectArray: [EnvironmentObject.init(xStart: 50, xEnd: 100, yStart: 50, yEnd: 100, alignment: Alignment.center,id: 1)])
         }
     }
 }

@@ -10,6 +10,8 @@
 		90052687289F76230074898F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90052686289F76230074898F /* Player.swift */; };
 		9005268A289F76470074898F /* PlayerObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90052689289F76470074898F /* PlayerObject.swift */; };
 		9005268D289F76830074898F /* DragTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9005268C289F76830074898F /* DragTest.swift */; };
+		9037B15128AE5F4400228214 /* PhysicsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9037B15028AE5F4400228214 /* PhysicsHandler.swift */; };
+		9037B15328AE607700228214 /* MovementHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9037B15228AE607700228214 /* MovementHandler.swift */; };
 		90A6A213289F644800892261 /* GameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A212289F644800892261 /* GameApp.swift */; };
 		90A6A215289F644800892261 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A214289F644800892261 /* ContentView.swift */; };
 		90A6A217289F644900892261 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A6A216289F644900892261 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 		90052686289F76230074898F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		90052689289F76470074898F /* PlayerObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObject.swift; sourceTree = "<group>"; };
 		9005268C289F76830074898F /* DragTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTest.swift; sourceTree = "<group>"; };
+		9037B15028AE5F4400228214 /* PhysicsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsHandler.swift; sourceTree = "<group>"; };
+		9037B15228AE607700228214 /* MovementHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementHandler.swift; sourceTree = "<group>"; };
 		90A6A20F289F644800892261 /* Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A6A212289F644800892261 /* GameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameApp.swift; sourceTree = "<group>"; };
 		90A6A214289F644800892261 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9037B14F28AE5F2F00228214 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				9037B15028AE5F4400228214 /* PhysicsHandler.swift */,
+				9037B15228AE607700228214 /* MovementHandler.swift */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
 		90A6A206289F644800892261 = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +198,7 @@
 		90A6A23C289F645E00892261 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				9037B14F28AE5F2F00228214 /* Physics */,
 				90052685289F76100074898F /* Obstacles */,
 				90052684289F76080074898F /* Environment */,
 				90052683289F75F60074898F /* NPCs */,
@@ -328,9 +342,11 @@
 				90A6A215289F644800892261 /* ContentView.swift in Sources */,
 				9005268A289F76470074898F /* PlayerObject.swift in Sources */,
 				9005268D289F76830074898F /* DragTest.swift in Sources */,
+				9037B15328AE607700228214 /* MovementHandler.swift in Sources */,
 				90052687289F76230074898F /* Player.swift in Sources */,
 				90DBF43C28A2624E00F9EF05 /* EnvironmentManager.swift in Sources */,
 				90A6A213289F644800892261 /* GameApp.swift in Sources */,
+				9037B15128AE5F4400228214 /* PhysicsHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,15 +6,25 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 
 struct PlayerObject{
     var positionX: Double
     var positionY: Double
+
     
     static func equal(player1: PlayerObject, player2: PlayerObject) -> Bool {
         return (player1.positionX == player2.positionX && player1.positionY == player2.positionY)
+        
+    }
+    
+    func checkHit(){
+        
+    }
+    
+    
+    func hitWall(){
         
     }
 }

@@ -85,6 +85,7 @@ struct DragTest: View {
                     currentMouse = CGSize(width: value.translation.width + accumulated.width - prevMouse.width
                                           , height: value.translation.height + accumulated.height - prevMouse.height)
                     offset = CGSize(width: accumulated.width + currentMouse.width, height: accumulated.height + currentMouse.height)
+                    let _ = print("x: \(accumulated.width + currentMouse.width), y: \(accumulated.height + currentMouse.height)")
                     
                 }
                 .onEnded { value in
@@ -94,10 +95,9 @@ struct DragTest: View {
                         offset = CGSize(width:prevPos.width - ( value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height))
                         accumulated = offset
                         onClick = false
+                        let _ = print("x: \(accumulated.width + currentMouse.width), y: \(accumulated.height + currentMouse.height)")
                     }
                 }
-            // a combined gesture that forces the user to long press then drag
-    //        let combined = pressGesture.sequenced(before: dragGesture)
 
             // a 64x64 circle that scales up when it's dragged, sets its offset to whatever we had back from the drag gesture, and uses our combined gesture
             ZStack{
