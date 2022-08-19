@@ -18,4 +18,7 @@ class MovementHandler {
     static func getVector(current: CGSize, end: CGSize) ->CGSize{
         return CGSize.init(width: current.width - end.width, height: current.height - end.height)
     }
+    static func getDistant(vector: CGSize) -> Double{
+        return (vector.width*vector.width + vector.height*vector.height).squareRoot()
+    }
 }
