@@ -11,14 +11,22 @@ import SwiftUI
 class MovementHandler {
     var current: CGSize
     var end: CGSize
+    var duration: Double
     init(current: CGSize, end: CGSize) {
         self.current = current
         self.end = end
+        self.duration = 0.0
     }
     static func getVector(current: CGSize, end: CGSize) ->CGSize{
-        return CGSize.init(width: current.width - end.width, height: current.height - end.height)
+        return CGSize.init(width: end.width - current.width, height: end.height - current.height)
     }
     static func getDistant(vector: CGSize) -> Double{
         return (vector.width*vector.width + vector.height*vector.height).squareRoot()
+    }
+    static func addVector(first: CGSize, second: CGSize) ->CGSize{
+        return CGSize.init(width: first.width + second.width, height: first.height + second.height)
+    }
+    static func divideVector(vector: CGSize, divideBy: Double) -> CGSize{
+        return CGSize.init(width: vector.width/divideBy, height: vector.height/divideBy)
     }
 }

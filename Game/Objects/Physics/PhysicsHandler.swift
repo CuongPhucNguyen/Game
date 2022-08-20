@@ -11,16 +11,26 @@ import SwiftUI
 class PhysicsHandler{
     var otherFactor: [MovementHandler]
     var movementDivided: [MovementHandler]
+    var finalMovement: [MovementHandler]
     var movement: MovementHandler
     init(position:CGSize) {
         self.movement = MovementHandler.init(current: position, end: position)
         self.otherFactor = []
         self.movementDivided = []
+        self.finalMovement = []
         self.getMovement()
     }
     func getMovement(){
         if (self.movement.current != self.movement.end){
             //Add movement divider
+            var newMovement = MovementHandler.init(
+                current:MovementHandler.addVector(
+                    first: MovementHandler.divideVector(
+                        vector: MovementHandler.getVector(
+                            current: movement.current,end: movement.end),
+                        divideBy: 60),
+                    second: movement.current),
+                end: movement.end)
             
             
             
@@ -57,10 +67,22 @@ class PhysicsHandler{
     }
     
     //Add checking for collision direction then changing direction if true
-    func checkCollision(environmentStuff: EnvironmentObject){
-        if (self.movement.current.width + getHitbox().width >= environmentStuff.xStart && self.movement.current.width + getHitbox().width >= environmentStuff.xEnd){
-            
+    func checkCollision(environmentStuff: EnvironmentObject) -> collisionEdge{
+        var collisionBool: collisionEdge = collisionEdge.init(sides: false, topBot: false)
+        if (self.movement.current.width + getHitbox().width >= environmentStuff.xStart && self.movement.current.width + getHitbox().width <= environmentStuff.xEnd){
+            collisionBool.sides = true
         }
+        if (self.movement.current.width + getHitbox().height >= environmentStuff.yStart && self.movement.current.width + getHitbox().height <= environmentStuff.yEnd){
+            collisionBool.topBot = true
+        }
+        return collisionBool
     }
 
+}
+
+
+
+struct collisionEdge {
+    var sides: Bool
+    var topBot: Bool
 }
