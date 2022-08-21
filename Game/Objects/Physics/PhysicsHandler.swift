@@ -14,7 +14,7 @@ class PhysicsHandler{
     var finalMovement: [MovementHandler]
     var movement: MovementHandler
     init(position:CGSize) {
-        self.movement = MovementHandler.init(current: position, end: position)
+        self.movement = MovementHandler.init(current: position, end: position, id: 1)
         self.otherFactor = []
         self.movementDivided = []
         self.finalMovement = []
@@ -23,19 +23,15 @@ class PhysicsHandler{
     func getMovement(){
         if (self.movement.current != self.movement.end){
             //Add movement divider
-            var newMovement = MovementHandler.init(
+            let newMovement = MovementHandler.init(
                 current:MovementHandler.addVector(
                     first: MovementHandler.divideVector(
                         vector: MovementHandler.getVector(
                             current: movement.current,end: movement.end),
                         divideBy: 60),
                     second: movement.current),
-                end: movement.end)
-            
-            
-            
-            
-            
+                end: movement.end, id: self.movementDivided.endIndex)
+            movementDivided.append(newMovement)
             //End
             self.getMovement()
         }
@@ -77,6 +73,20 @@ class PhysicsHandler{
         }
         return collisionBool
     }
+//    func applyFactor(){
+//        ForEach(self.movementDivided){ movement in
+//            ForEach(self.otherFactor){ factor in
+//                self.finalMovement.append(
+//                    MovementHandler.init(current: movement.current,
+//                                         end:
+//                                            MovementHandler.addVector(first: movement.current,second:
+//                                                                        MovementHandler.addVector(first: movement.end, second: factor)),
+//                                         id: movement.id)
+//                )
+//            }
+//            
+//        }
+//    }
 
 }
 

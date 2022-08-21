@@ -8,11 +8,13 @@
 import Foundation
 import SwiftUI
 
-class MovementHandler {
+class MovementHandler: Identifiable {
+    let id: Int
     var current: CGSize
     var end: CGSize
     var duration: Double
-    init(current: CGSize, end: CGSize) {
+    init(current: CGSize, end: CGSize, id: Int) {
+        self.id = id
         self.current = current
         self.end = end
         self.duration = 0.0

@@ -61,6 +61,7 @@ struct DragTest: View {
     */
     
     // how far the circle has been dragged
+    var array: [Int] = []
     @State private var offset = CGSize.zero
     @State var accumulated: CGSize = CGSize.zero
     @State var prevPos: CGSize = CGSize.zero
@@ -95,7 +96,15 @@ struct DragTest: View {
                         offset = CGSize(width:prevPos.width - ( value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height))
                         accumulated = offset
                         onClick = false
-                        let _ = print("x: \(accumulated.width + currentMouse.width), y: \(accumulated.height + currentMouse.height)")
+                        
+                        
+                        
+                        //TESTING DELETE LATER
+                        
+                        let _ = print(array.endIndex)
+                    
+                    
+                    
                     }
                 }
 
