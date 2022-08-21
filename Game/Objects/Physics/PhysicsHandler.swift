@@ -73,20 +73,47 @@ class PhysicsHandler{
         }
         return collisionBool
     }
-//    func applyFactor(){
-//        ForEach(self.movementDivided){ movement in
-//            ForEach(self.otherFactor){ factor in
-//                self.finalMovement.append(
-//                    MovementHandler.init(current: movement.current,
-//                                         end:
-//                                            MovementHandler.addVector(first: movement.current,second:
-//                                                                        MovementHandler.addVector(first: movement.end, second: factor)),
-//                                         id: movement.id)
-//                )
-//            }
-//            
-//        }
-//    }
+    
+    
+    
+    
+    
+    
+    
+    func applyFactor(){
+        for dividedMovement in self.movementDivided{
+            
+            for factor in self.otherFactor{
+                
+                self.finalMovement.append(
+                    MovementHandler.init(current: (dividedMovement.id == 0) ?
+                        (dividedMovement.current):
+                        (MovementHandler.addVector(
+                            first: dividedMovement.current, second: movementDivided[dividedMovement.id - 1].end)),
+                             end: (dividedMovement.id == 0) ?
+                                (MovementHandler.addVector(first: dividedMovement.end, second:
+                                                            MovementHandler.getVector(current: factor.current, end: factor.end))):
+                                (MovementHandler.addVector(first:
+                                                            MovementHandler.getVector(current: movementDivided[dividedMovement.id-1].current,
+                                                                                      end: movementDivided[dividedMovement.id-1].end),second:
+                                                            MovementHandler.addVector(first: dividedMovement.end, second:
+                                                                                        MovementHandler.getVector(current: factor.current, end: factor.end)
+                                                                                     )
+                                                          )
+                                ),
+                             id: movement.id
+                        )
+                )
+            }
+            
+        }
+    }
+    
+    
+    
+    func addFactor(factor: MovementHandler){
+        self.otherFactor.append(factor)
+    }
 
 }
 

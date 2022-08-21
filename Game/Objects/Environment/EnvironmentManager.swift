@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 struct EnvironmentManager: View {
-    @State var playerPosChanging: Bool = false
+//    @State var playerPosChanging: Bool = false
     @State var environmentObjectArray: [EnvironmentObject]
     var body : some View {
         ZStack{
             ForEach(environmentObjectArray){ object in
                 Environment(environment: object)
             }
-            DragTest(changing: $playerPosChanging)
+            DragTest()
         }
     }
 }
@@ -25,6 +25,6 @@ struct EnvironmentManager: View {
 
 struct environmentPreview : PreviewProvider {
     static var previews: some View{
-        EnvironmentManager(playerPosChanging: false, environmentObjectArray: [EnvironmentObject.init(xStart: 0.0, xEnd: 50, yStart: 0, yEnd: 50, alignment: Alignment.center,id: 1)])
+        EnvironmentManager(environmentObjectArray: [EnvironmentObject.init(xStart: 0.0, xEnd: 50, yStart: 0, yEnd: 50, alignment: Alignment.center,id: 1)])
     }
 }

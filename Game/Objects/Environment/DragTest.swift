@@ -61,14 +61,14 @@ struct DragTest: View {
     */
     
     // how far the circle has been dragged
-    var array: [Int] = []
+    @State var physics: PhysicsHandler
     @State private var offset = CGSize.zero
     @State var accumulated: CGSize = CGSize.zero
     @State var prevPos: CGSize = CGSize.zero
     @State var prevMouse: CGSize = CGSize.zero
     @State var currentMouse: CGSize = CGSize.zero
     @State var onClick: Bool = false
-    @Binding var changing: Bool
+//    @Binding var changing: Bool
 
     // whether it is currently being dragged or not
     @State private var isDragging = false
@@ -90,21 +90,14 @@ struct DragTest: View {
                     
                 }
                 .onEnded { value in
-                    withAnimation (.easeOut(duration:0.3)) {
-                        changing = true
+                    withAnimation () {
+//                        changing = true
                         isDragging = false
                         offset = CGSize(width:prevPos.width - ( value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height))
                         accumulated = offset
                         onClick = false
                         
                         
-                        
-                        //TESTING DELETE LATER
-                        
-                        let _ = print(array.endIndex)
-                    
-                    
-                    
                     }
                 }
 
@@ -125,7 +118,12 @@ struct DragTest: View {
             }
             
         }
+        
             
+    }
+    init(){
+        self.physics = PhysicsHandler.init(position: CGSize.zero)
+//        self.changing = changing
     }
 }
 
