@@ -14,14 +14,13 @@ class PhysicsHandler{
     var finalMovement: [MovementHandler]
     var movement: MovementHandler
     init(position:CGSize) {
-        self.movement = MovementHandler.init(current: position, end: position, id: 1)
-        self.otherFactor = []
-        self.movementDivided = []
-        self.finalMovement = []
-        self.getMovement()
+        self.movement = MovementHandler.init(current: position, end: position, id: 0)
+        self.otherFactor = [MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 0)]
+        self.movementDivided = [MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 0)]
+        self.finalMovement = [MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 0)]
     }
-    func getMovement(){
-        if (self.movement.current != self.movement.end){
+    func getMovement(count: Int){
+        if (count < 60){
             //Add movement divider
             let newMovement = MovementHandler.init(
                 current:MovementHandler.addVector(
@@ -33,11 +32,14 @@ class PhysicsHandler{
                 end: movement.end, id: self.movementDivided.endIndex)
             movementDivided.append(newMovement)
             //End
-            self.getMovement()
+            self.getMovement(count:count+1)
         }
     }
     func launch(endPosition: CGSize){
         self.movement.end = endPosition
+        self.getMovement(count: 0)
+        applyFactor()
+        self.movement.current = self.finalMovement[self.finalMovement.endIndex-1].current
     }
     func update(){
         self.movement.current = self.movement.end
@@ -110,10 +112,18 @@ class PhysicsHandler{
     }
     
     
-    
     func addFactor(factor: MovementHandler){
         self.otherFactor.append(factor)
     }
+    
+    
+    func clearMovement(){
+        self.movementDivided.removeAll()
+        self.movementDivided = [MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 1)]
+    }
+    
+    
+    
 
 }
 

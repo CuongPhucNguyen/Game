@@ -61,6 +61,7 @@ struct DragTest: View {
     */
     
     // how far the circle has been dragged
+    @State var opacityHandler: Double = 100
     @State var physics: PhysicsHandler
     @State private var offset = CGSize.zero
     @State var accumulated: CGSize = CGSize.zero
@@ -82,23 +83,37 @@ struct DragTest: View {
                         prevMouse = CGSize(width: value.translation.width + accumulated.width, height: value.translation.height + accumulated.height)
                         onClick = true
                     }
-                    prevPos = accumulated
+                    opacityHandler = 100
+                    
                     currentMouse = CGSize(width: value.translation.width + accumulated.width - prevMouse.width
                                           , height: value.translation.height + accumulated.height - prevMouse.height)
                     offset = CGSize(width: accumulated.width + currentMouse.width, height: accumulated.height + currentMouse.height)
-                    let _ = print("x: \(accumulated.width + currentMouse.width), y: \(accumulated.height + currentMouse.height)")
+                    let _ = print(physics.movementDivided.endIndex)
                     
                 }
                 .onEnded { value in
-                    withAnimation () {
+                    
+                    
+                    isDragging = false
+                    physics.launch(endPosition: CGSize(width:prevPos.width - ( value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
+                    onClick = false
+                    opacityHandler = 0.0
+                    
+                    
+                    
+                    
 //                        changing = true
-                        isDragging = false
-                        offset = CGSize(width:prevPos.width - ( value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height))
-                        accumulated = offset
-                        onClick = false
-                        
-                        
+                    for movementAnimation in physics.finalMovement{
+                        withAnimation (.linear(duration: 0.1)) {
+                            offset = movementAnimation.current
+                        }
                     }
+                        
+                        
+                    accumulated = physics.finalMovement[physics.finalMovement.endIndex-1].current
+                    physics.clearMovement()
+                    prevPos = physics.movement.current
+                    
                 }
 
             // a 64x64 circle that scales up when it's dragged, sets its offset to whatever we had back from the drag gesture, and uses our combined gesture
@@ -108,6 +123,7 @@ struct DragTest: View {
                     .frame(width: 64, height: 64)
                     .scaleEffect(isDragging ? 1.5 : 1)
                     .offset(prevPos)
+                    .opacity(opacityHandler)
                 Circle()
                     .fill(.red)
                     .frame(width: 64, height: 64)
@@ -123,6 +139,7 @@ struct DragTest: View {
     }
     init(){
         self.physics = PhysicsHandler.init(position: CGSize.zero)
+        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 1.0, height: 1.0), id: 1))
 //        self.changing = changing
     }
 }
