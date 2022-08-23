@@ -69,6 +69,7 @@ struct DragTest: View {
     @State var prevMouse: CGSize = CGSize.zero
     @State var currentMouse: CGSize = CGSize.zero
     @State var onClick: Bool = false
+    @State var frames: [FrameRender] = []
 //    @Binding var changing: Bool
 
     // whether it is currently being dragged or not
@@ -99,16 +100,14 @@ struct DragTest: View {
                     opacityHandler = 0.0
                     let _ = print(physics.finalMovement[physics.finalMovement.endIndex-1].end)
                     
+                    frames = FrameRender.RenderAll(physics: physics)
                     
-                    
-                    
-//                        changing = true
-                    for movementAnimation in physics.finalMovement{
-                        withAnimation (.linear(duration: 0.1)) {
-                            offset =  movementAnimation.end
-                        }
+                    for frame in frames {
+                        frame
                     }
                     
+//                    frames.removeAll()
+                    offset = physics.finalMovement[physics.finalMovement.endIndex-1].end
                     physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
                     physics.update()
                     physics.clearMovement()
@@ -141,8 +140,7 @@ struct DragTest: View {
     }
     init(){
         self.physics = PhysicsHandler.init(position: CGSize.zero)
-        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0), id: 1))
-//        self.changing = changing
+        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 1), id: 1))
     }
 }
 
