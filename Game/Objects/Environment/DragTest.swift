@@ -77,45 +77,52 @@ struct DragTest: View {
 
     var body: some View {
         Group{
-            // a drag gesture that updates offset and isDragging as it moves around
-            let dragGesture = DragGesture()
-                .onChanged { value in
-                    if (!onClick){
-                        prevMouse = CGSize(width: value.translation.width + accumulated.width, height: value.translation.height + accumulated.height)
-                        onClick = true
-                    }
-                    opacityHandler = 100
-                    
-                    currentMouse = CGSize(width: value.translation.width + accumulated.width - prevMouse.width
-                                          , height: value.translation.height + accumulated.height - prevMouse.height)
-                    offset = CGSize(width: accumulated.width + currentMouse.width, height: accumulated.height + currentMouse.height)
-                    
-                }
-                .onEnded { value in
-                    
-                    
-                    isDragging = false
-                    physics.launch(endPosition: CGSize(width:prevPos.width - (value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
-                    onClick = false
-                    opacityHandler = 0.0
-                    let _ = print(physics.finalMovement[physics.finalMovement.endIndex-1].end)
-                    
-                    frames = FrameRender.RenderAll(physics: physics)
-                    
-                    changing.toggle()
-                    offset = physics.finalMovement[physics.finalMovement.endIndex-1].end
-                    physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
-                    physics.update()
-                    physics.clearMovement()
-                    prevPos = physics.movement.current
-                    accumulated = physics.movement.current
-                     
-                    
-                }
+            
             
 
             // a 64x64 circle that scales up when it's dragged, sets its offset to whatever we had back from the drag gesture, and uses our combined gesture
             ZStack{
+                // a drag gesture that updates offset and isDragging as it moves around
+                let dragGesture = DragGesture()
+                    .onChanged { value in
+                        if (!onClick){
+                            prevMouse = CGSize(width: value.translation.width + accumulated.width, height: value.translation.height + accumulated.height)
+                            onClick = true
+                        }
+                        opacityHandler = 100
+                        
+                        currentMouse = CGSize(width: value.translation.width + accumulated.width - prevMouse.width
+                                              , height: value.translation.height + accumulated.height - prevMouse.height)
+                        offset = CGSize(width: accumulated.width + currentMouse.width, height: accumulated.height + currentMouse.height)
+                        
+                    }
+                    .onEnded { value in
+                        
+                        
+                        isDragging = false
+                        physics.launch(endPosition: CGSize(width:prevPos.width - (value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
+                        onClick = false
+                        opacityHandler = 0.0
+                        let _ = print(physics.finalMovement[physics.finalMovement.endIndex-1].end)
+                        
+                        
+                        
+                        changing.toggle()
+                        offset = physics.finalMovement[physics.finalMovement.endIndex-1].end
+                        physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
+                        physics.update()
+                        physics.clearMovement()
+                        prevPos = physics.movement.current
+                        accumulated = physics.movement.current
+                         
+                        
+                    }
+                
+                
+                
+                
+                
+                
                 Circle()
                     .fill(.blue)
                     .frame(width: 64, height: 64)
@@ -128,6 +135,14 @@ struct DragTest: View {
                     .scaleEffect(isDragging ? 1.5 : 1)
                     .offset(offset)
                     .gesture(dragGesture)
+                ForEach(physics.finalMovement){ motion in
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 64, height: 64)
+                        .scaleEffect(isDragging ? 1.5 : 1)
+                        .offset(motion.end)
+                }
+                
                 
             }
             
