@@ -70,7 +70,7 @@ struct DragTest: View {
     @State var currentMouse: CGSize = CGSize.zero
     @State var onClick: Bool = false
     @State var frames: [FrameRender] = []
-//    @Binding var changing: Bool
+    @State var changing: Bool = false
 
     // whether it is currently being dragged or not
     @State private var isDragging = false
@@ -102,11 +102,7 @@ struct DragTest: View {
                     
                     frames = FrameRender.RenderAll(physics: physics)
                     
-                    for frame in frames {
-                        frame
-                    }
-                    
-//                    frames.removeAll()
+                    changing.toggle()
                     offset = physics.finalMovement[physics.finalMovement.endIndex-1].end
                     physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
                     physics.update()
@@ -116,6 +112,7 @@ struct DragTest: View {
                      
                     
                 }
+            
 
             // a 64x64 circle that scales up when it's dragged, sets its offset to whatever we had back from the drag gesture, and uses our combined gesture
             ZStack{
