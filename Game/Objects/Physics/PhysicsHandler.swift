@@ -39,8 +39,9 @@ class PhysicsHandler{
             )
             movementDivided.append(newMovement)
             //End
+            let _ = print(self.movementDivided.endIndex-1)
             self.getMovement(count:count+1)
-            let _ = print(self.movementDivided.endIndex)
+            
         }
     }
     
@@ -138,7 +139,7 @@ class PhysicsHandler{
     
     func clearMovement(){
         self.movementDivided.removeAll()
-        self.movementDivided = [MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 1)]
+        self.finalMovement.removeAll()
     }
     
     

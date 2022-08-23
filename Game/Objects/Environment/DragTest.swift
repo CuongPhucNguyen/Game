@@ -97,6 +97,7 @@ struct DragTest: View {
                     physics.launch(endPosition: CGSize(width:prevPos.width - (value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
                     onClick = false
                     opacityHandler = 0.0
+                    let _ = print(physics.finalMovement[physics.finalMovement.endIndex-1].end)
                     
                     
                     
@@ -140,7 +141,7 @@ struct DragTest: View {
     }
     init(){
         self.physics = PhysicsHandler.init(position: CGSize.zero)
-        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: -0.01), id: 1))
+        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0), id: 1))
 //        self.changing = changing
     }
 }
