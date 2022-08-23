@@ -88,14 +88,13 @@ struct DragTest: View {
                     currentMouse = CGSize(width: value.translation.width + accumulated.width - prevMouse.width
                                           , height: value.translation.height + accumulated.height - prevMouse.height)
                     offset = CGSize(width: accumulated.width + currentMouse.width, height: accumulated.height + currentMouse.height)
-                    let _ = print(physics.movementDivided.endIndex)
                     
                 }
                 .onEnded { value in
                     
                     
                     isDragging = false
-                    physics.launch(endPosition: CGSize(width:prevPos.width - ( value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
+                    physics.launch(endPosition: CGSize(width:prevPos.width - (value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
                     onClick = false
                     opacityHandler = 0.0
                     
@@ -105,14 +104,16 @@ struct DragTest: View {
 //                        changing = true
                     for movementAnimation in physics.finalMovement{
                         withAnimation (.linear(duration: 0.1)) {
-                            offset = movementAnimation.current
+                            offset =  movementAnimation.end
                         }
                     }
-                        
-                        
-                    accumulated = physics.finalMovement[physics.finalMovement.endIndex-1].current
+                    
+                    physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
+                    physics.update()
                     physics.clearMovement()
                     prevPos = physics.movement.current
+                    accumulated = physics.movement.current
+                     
                     
                 }
 
@@ -139,7 +140,7 @@ struct DragTest: View {
     }
     init(){
         self.physics = PhysicsHandler.init(position: CGSize.zero)
-        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 1.0, height: 1.0), id: 1))
+        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: -0.01), id: 1))
 //        self.changing = changing
     }
 }
