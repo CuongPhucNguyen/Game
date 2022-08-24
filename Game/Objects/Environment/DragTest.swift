@@ -63,7 +63,8 @@ struct DragTest: View {
     // how far the circle has been dragged
     @State var opacityHandler: Double = 100
     @State var physics: PhysicsHandler
-    @State private var offset = CGSize.zero
+//    @State private var offset: [CGSize] = [CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero]
+    @State private var offset: CGSize = CGSize.zero
     @State var accumulated: CGSize = CGSize.zero
     @State var prevPos: CGSize = CGSize.zero
     @State var prevMouse: CGSize = CGSize.zero
@@ -72,6 +73,7 @@ struct DragTest: View {
     @State var frames: [FrameRender] = []
     @State var changing: Bool = false
     @State var delayTimer: Double = 0.0
+    @State var durationTimer: Double = 0.0
 
     // whether it is currently being dragged or not
     @State private var isDragging = false
@@ -104,17 +106,17 @@ struct DragTest: View {
                         physics.launch(endPosition: CGSize(width:prevPos.width - (value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
                         onClick = false
                         opacityHandler = 0.0
-                        let _ = print(physics.finalMovement[physics.finalMovement.endIndex-1].end)
-                        
-                        
                         
                         for motion in physics.finalMovement{
-                            withAnimation(.linear(duration: 0.1).delay(delayTimer+0.1))
-                            delayTimer += 0.1;
+                            withAnimation(.linear(duration: durationTimer).delay(delayTimer)){
+                                offset = motion.end
+                                
+                            }
+                            durationTimer = 0.02
+                            delayTimer += durationTimer
                         }
-                              
+                        durationTimer = 0.0
                         delayTimer = 0.0
-                        offset = physics.finalMovement[physics.finalMovement.endIndex-1].end
                         physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
                         physics.update()
                         physics.clearMovement()
@@ -141,8 +143,8 @@ struct DragTest: View {
                     .scaleEffect(isDragging ? 1.5 : 1)
                     .offset(offset)
                     .gesture(dragGesture)
-                
-                
+
+
             }
             
         }
@@ -151,17 +153,7 @@ struct DragTest: View {
     }
     init(){
         self.physics = PhysicsHandler.init(position: CGSize.zero)
-        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 1), id: 1))
+        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0001), id: 1))
     }
 }
 
-
-
-
-//struct preview: PreviewProvider{
-//    @State var changing: Bool = false
-//    static var previews: some View{
-//
-//        DragTest(changing: changing)
-//    }
-//}

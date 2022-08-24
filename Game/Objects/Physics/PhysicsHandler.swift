@@ -20,7 +20,7 @@ class PhysicsHandler{
         self.finalMovement = []
     }
     func getMovement(count: Int){
-        if (count < 60){
+        if (count < 20){
             //Add movement divider
             let newMovement = MovementHandler.init(
                 current:
@@ -31,7 +31,7 @@ class PhysicsHandler{
                                                                                                             self.movement.current,
                                                                                                           end:
                                                                                                             self.movement.end),
-                                                                             divideBy: 60),
+                                                                             divideBy: 20),
                                               second:
                                                 (self.movementDivided.endIndex == 0) ? self.movement.current : self.movementDivided[self.movementDivided.endIndex-1].end
                                              ),
@@ -103,24 +103,44 @@ class PhysicsHandler{
                                          end:(dividedMovement.id == 0) ?
                                             (
                                                 MovementHandler.addVector(first:
-                                                                                dividedMovement.current,
+                                                                                dividedMovement.end,
                                                                           second:
                                                                                 MovementHandler.getVector(current: factor.current, end: factor.end)
                                                                          )
                                             ):
                                             (
+                                                
+//                                                MovementHandler.addVector(first:
+//                                                                            MovementHandler.addVector(first:
+//                                                                                                        MovementHandler.getVector(current:
+//                                                                                                                                    self.finalMovement[dividedMovement.id-1].current,
+//                                                                                                                                  end:
+//                                                                                                                                    self.finalMovement[dividedMovement.id-1].end
+//                                                                                                                                 ),
+//                                                                                                      second:
+//                                                                                                        MovementHandler.getVector(current: factor.current, end: factor.end)
+//                                                                                                     ),
+//                                                                          second:
+//                                                                            self.finalMovement[dividedMovement.id - 1].end
+//                                                                         )
+                                                
                                                 MovementHandler.addVector(first:
                                                                             MovementHandler.addVector(first:
-                                                                                                        MovementHandler.getVector(current:
-                                                                                                                                    self.movementDivided[dividedMovement.id-1].current,
-                                                                                                                                  end:
-                                                                                                                                    self.movementDivided[dividedMovement.id-1].end
-                                                                                                                                 ),
+                                                                                                        MovementHandler.addVector(first:
+                                                                                                                                    MovementHandler.getVector(current:
+                                                                                                                                                                self.movementDivided[dividedMovement.id-1].end,
+                                                                                                                                                              end:
+                                                                                                                                                                self.finalMovement[dividedMovement.id-1].end),
+                                                                                                                                  second:
+                                                                                                                                    MovementHandler.getVector(current:
+                                                                                                                                                                self.movementDivided[dividedMovement.id-1].end,
+                                                                                                                                                              end:
+                                                                                                                                                                self.finalMovement[dividedMovement.id-1].end)
+                                                                                                                                  ),
                                                                                                       second:
-                                                                                                        MovementHandler.getVector(current: factor.current, end: factor.end)
-                                                                                                     ),
+                                                                                                        self.movementDivided[dividedMovement.id].end),
                                                                           second:
-                                                                            self.finalMovement[dividedMovement.id - 1].end
+                                                                            MovementHandler.getVector(current: factor.current, end: factor.end)
                                                                          )
                                             ),
                                          id: movement.id

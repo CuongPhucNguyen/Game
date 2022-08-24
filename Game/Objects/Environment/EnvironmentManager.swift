@@ -21,10 +21,3 @@ struct EnvironmentManager: View {
     }
 }
 
-
-
-struct environmentPreview : PreviewProvider {
-    static var previews: some View{
-        EnvironmentManager(environmentObjectArray: [EnvironmentObject.init(xStart: 0.0, xEnd: 50, yStart: 0, yEnd: 50, alignment: Alignment.center,id: 1)])
-    }
-}
