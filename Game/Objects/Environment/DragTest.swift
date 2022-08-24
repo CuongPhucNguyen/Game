@@ -71,6 +71,7 @@ struct DragTest: View {
     @State var onClick: Bool = false
     @State var frames: [FrameRender] = []
     @State var changing: Bool = false
+    @State var delayTimer: Double = 0.0
 
     // whether it is currently being dragged or not
     @State private var isDragging = false
@@ -107,7 +108,12 @@ struct DragTest: View {
                         
                         
                         
-                        changing.toggle()
+                        for motion in physics.finalMovement{
+                            withAnimation(.linear(duration: 0.1).delay(delayTimer+0.1))
+                            delayTimer += 0.1;
+                        }
+                              
+                        delayTimer = 0.0
                         offset = physics.finalMovement[physics.finalMovement.endIndex-1].end
                         physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
                         physics.update()
@@ -135,13 +141,6 @@ struct DragTest: View {
                     .scaleEffect(isDragging ? 1.5 : 1)
                     .offset(offset)
                     .gesture(dragGesture)
-                ForEach(physics.finalMovement){ motion in
-                    Circle()
-                        .fill(.red)
-                        .frame(width: 64, height: 64)
-                        .scaleEffect(isDragging ? 1.5 : 1)
-                        .offset(motion.end)
-                }
                 
                 
             }
