@@ -39,25 +39,16 @@ class MovementHandler: Identifiable {
         for obstacle in environment{
             let newMovementA = MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 0)
             
-            if (self.getHitbox().width <= obstacle.xEnd && self.getHitbox().width >= obstacle.xStart ){
-                
-                
-                //get bounce direction
-                if (obstacle.xStart >= self.current.width && obstacle.xStart <= self.end.width){
-                    newMovementA.end.width = self.end.width - obstacle.xStart
-                }
-                else if (obstacle.xEnd >= self.current.width && obstacle.xEnd <= self.end.width){
-                    newMovementA.end.width = self.end.width - obstacle.xEnd
-                }
-                
-                
-                
-                
-                
-                
-                
-                
-                
+            if (
+                (
+                    ((obstacle.xStart <= self.end.width)&&(obstacle.xStart >= self.current.width)) ||
+                    ((obstacle.xEnd <= self.end.width)&&(obstacle.xEnd >= self.current.width))
+                ) && (
+                    ((obstacle.yStart <= self.end.height)&&(obstacle.yStart >= self.current.height)) ||
+                    ((obstacle.yEnd <= self.end.height)&&(obstacle.yEnd >= self.current.height))
+                )
+            ){
+//                if ()
             }
             
             
