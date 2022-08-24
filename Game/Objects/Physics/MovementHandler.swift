@@ -38,7 +38,6 @@ class MovementHandler: Identifiable {
         var movements: [MovementHandler] = []
         for obstacle in environment{
             let newMovementA = MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 0)
-            
             if (
                 (
                     ((obstacle.xStart <= self.end.width)&&(obstacle.xStart >= self.current.width)) ||
@@ -48,7 +47,7 @@ class MovementHandler: Identifiable {
                     ((obstacle.yEnd <= self.end.height)&&(obstacle.yEnd >= self.current.height))
                 )
             ){
-//                if ()
+//                let calculatingMovementA = new 
             }
             
             
