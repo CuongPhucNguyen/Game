@@ -31,4 +31,39 @@ class MovementHandler: Identifiable {
     static func divideVector(vector: CGSize, divideBy: Double) -> CGSize{
         return CGSize.init(width: vector.width/divideBy, height: vector.height/divideBy)
     }
+    func getHitbox()->CGSize{
+        return CGSize.init(width: 4*(self.end.width-self.current.width)/abs(self.end.width-self.current.width) + self.end.width, height: 4*(self.end.height-self.current.height)/abs(self.end.height-self.current.height) + self.end.height)
+    }
+    func checkCollision(environment: [EnvironmentObject])->[MovementHandler]{
+        var movements: [MovementHandler] = []
+        for obstacle in environment{
+            let newMovementA = MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 0)
+            
+            if (self.getHitbox().width <= obstacle.xEnd && self.getHitbox().width >= obstacle.xStart ){
+                
+                
+                //get bounce direction
+                if (obstacle.xStart >= self.current.width && obstacle.xStart <= self.end.width){
+                    newMovementA.end.width = self.end.width - obstacle.xStart
+                }
+                else if (obstacle.xEnd >= self.current.width && obstacle.xEnd <= self.end.width){
+                    newMovementA.end.width = self.end.width - obstacle.xEnd
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
+        return movements
+    }
 }
+
