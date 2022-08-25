@@ -70,7 +70,7 @@ class PhysicsHandler{
             let motion = MovementHandler.init(current:
                                                 (dividedMovement.id == 0) ?
                                                 (dividedMovement.current):
-                                                (self.finalMovement[dividedMovement.id - 1].end),
+                                                (self.finalMovement[self.finalMovement.endIndex - 1].end),
                                               end:
                                                 (dividedMovement.id == 0) ?
                                                 (dividedMovement.end)
@@ -80,13 +80,13 @@ class PhysicsHandler{
                                                                                                         MovementHandler.getVector(current:
                                                                                                                                     self.movementDivided[dividedMovement.id-1].end,
                                                                                                                                   end:
-                                                                                                                                    self.finalMovement[dividedMovement.id-1].end
+                                                                                                                                    self.finalMovement[self.finalMovement.endIndex - 1].end
                                                                                                                                  ),
                                                                                                       second:
                                                                                                         MovementHandler.getVector(current:
                                                                                                                                     self.movementDivided[dividedMovement.id-1].end,
                                                                                                                                   end:
-                                                                                                                                    self.finalMovement[dividedMovement.id-1].end
+                                                                                                                                    self.finalMovement[self.finalMovement.endIndex - 1].end
                                                                                                                                  )
                                                                                                      ),
                                                                           second:
@@ -94,7 +94,7 @@ class PhysicsHandler{
                                                                          )
                                                 ),
                                               id: dividedMovement.id)
-            motion.duration = 0.01
+            motion.duration = 0.002
             
             
             
@@ -116,7 +116,7 @@ class PhysicsHandler{
             
             //Adding bounce
             
-            if (self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 25){
+            if (motion.end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 25){
                 
                 let newMotionA = motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 150)
                 newMotionA.duration = motion.duration*(
@@ -129,8 +129,8 @@ class PhysicsHandler{
                                                         CGSize.init(width:
                                                                         motion.end.width,
                                                                     height:
-                                                                        motion.end.height
-                                                                   ),
+                                                                        ((UIScreen.main.bounds.height/2) - 150 - motion.end.height) + newMotionA.end.height
+                                                                    ),
                                                       id: newMotionA.id+1)
                 newMotionB.duration = 0.002-newMotionA.duration
                 dividedMotion.append(newMotionB)
@@ -138,7 +138,7 @@ class PhysicsHandler{
                 self.finalMovement.append(contentsOf: dividedMotion)
                 wallBounce = true;
             }
-            if ( self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2)  <= 0 + 25){
+            if ( motion.end.height + (UIScreen.main.bounds.height/2)  <= 0 + 25){
                 
                 
                 let newMotionA = motion.getParallelWith(height: -(UIScreen.main.bounds.height/2) + 150)
@@ -152,7 +152,7 @@ class PhysicsHandler{
                                                         CGSize.init(width:
                                                                         motion.end.width,
                                                                     height:
-                                                                        motion.end.height
+                                                                        (-(UIScreen.main.bounds.height/2) + 150 - motion.end.height) + newMotionA.end.height
                                                                    ),
                                                       id: newMotionA.id+1)
                 newMotionB.duration = 0.002-newMotionA.duration
@@ -161,7 +161,7 @@ class PhysicsHandler{
                 self.finalMovement.append(contentsOf: dividedMotion)
                 wallBounce = true
             }
-            if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
+            if (motion.end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
                 
                 
                 let newMotionA = motion.getParallelWith(width: (UIScreen.main.bounds.width/2) - 10)
@@ -183,9 +183,17 @@ class PhysicsHandler{
                 
                 self.finalMovement.append(contentsOf: dividedMotion)
             }
-            else if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
+            else if (motion.end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
                 
             }
+            
+            
+            
+            
+            
+            
+            
+            
             if (wallBounce){
                 continue
             }
