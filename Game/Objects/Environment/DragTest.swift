@@ -103,7 +103,7 @@ struct DragTest: View {
                         
                         
                         isDragging = false
-                        physics.launch(endPosition: CGSize(width:prevPos.width - (value.translation.width*1.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*1.5 + accumulated.height - prevMouse.height)))
+                        physics.launch(endPosition: CGSize(width:prevPos.width - (value.translation.width*2.5 + accumulated.width - prevMouse.width), height: prevPos.height - (value.translation.height*2.5 + accumulated.height - prevMouse.height)))
                         onClick = false
                         opacityHandler = 0.0
                         

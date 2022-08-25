@@ -17,7 +17,7 @@ class MovementHandler: Identifiable {
         self.id = id
         self.current = current
         self.end = end
-        self.duration = 0.0
+        self.duration = 0.002
     }
     static func getVector(current: CGSize, end: CGSize) ->CGSize{
         return CGSize.init(width: end.width - current.width, height: end.height - current.height)
@@ -54,6 +54,29 @@ class MovementHandler: Identifiable {
             
         }
         return movements
+    }
+    
+    
+    
+    
+    
+    func getParallelWith(width: Double)->MovementHandler{
+        return MovementHandler.init(current:
+                                        self.current,
+                                    end:
+                                        CGSize.init(width: width,
+                                                    height: self.end.height*(width/self.end.width)
+                                                   ),
+                                                    id: self.id)
+    }
+    func getParallelWith(height: Double)->MovementHandler{
+        return MovementHandler.init(current:
+                                        self.current,
+                                    end:
+                                        CGSize.init(width: self.end.width*(height/self.end.height),
+                                                    height: height
+                                                   ),
+                                                    id: self.id)
     }
 }
 
