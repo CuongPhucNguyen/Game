@@ -112,7 +112,7 @@ struct DragTest: View {
                                 offset = motion.end
                                 
                             }
-                            durationTimer = 0.01
+                            durationTimer += 0.002
                             delayTimer += durationTimer
                         }
                         durationTimer = 0.0
@@ -154,6 +154,7 @@ struct DragTest: View {
     init(){
         self.physics = PhysicsHandler.init(position: CGSize.zero)
         physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0001), id: 1))
+//        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0001, height: 0.0), id: 1))
     }
 }
 
