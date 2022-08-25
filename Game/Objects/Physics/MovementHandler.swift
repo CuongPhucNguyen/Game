@@ -78,5 +78,34 @@ class MovementHandler: Identifiable {
                                                    ),
                                                     id: self.id)
     }
+    func changeVectDirection(reference: MovementHandler){
+        let vectMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: self.current, end: self.end))
+        let refMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: reference.current, end: reference.end))
+        let magnitudeDifference = vectMagnitude/refMagnitude
+        self.current = reference.end
+        self.end = MovementHandler.addVector(first: reference.getParallelWith(width: reference.end.width*magnitudeDifference).end, second: reference.end)
+    }
+    func changeVectDirectionWithReturn(reference: MovementHandler) -> MovementHandler{
+        let vectMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: self.current, end: self.end))
+        let refMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: reference.current, end: reference.end))
+        let magnitudeDifference = vectMagnitude/refMagnitude
+        let referenceVect = MovementHandler.getVector(current: reference.current, end: reference.end)
+        return MovementHandler.init(current: reference.end,
+                                    end:
+                                        MovementHandler.addVector(first: reference.end,
+                                                                  second:
+                                                                    MovementHandler.getVector(current:
+                                                                                                reference.getParallelWith(width:
+                                                                                                                            reference.current.width + referenceVect.width*magnitudeDifference
+                                                                                                                         ).current,
+                                                                                              end:
+                                                                                                reference.getParallelWith(width:
+                                                                                                                            reference.current.width + referenceVect.width*magnitudeDifference
+                                                                                                                         ).end
+                                                                                             )
+                                                                    
+                                                                 ),
+                                    id: reference.id)
+    }
 }
 
