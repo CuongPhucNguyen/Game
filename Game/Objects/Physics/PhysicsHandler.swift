@@ -131,8 +131,8 @@ class PhysicsHandler: Codable{
                 }
             }
             
-            
-            
+            //if(self.finalMovement.endIndex>0)
+            //let _ = print("self finalMovement: \(self.finalMovement[self.finalMovement.endIndex-1].end)")
             
             
             

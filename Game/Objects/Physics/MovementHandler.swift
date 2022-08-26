@@ -41,9 +41,11 @@ class MovementHandler: Identifiable, Codable {
             if(collisionDetected) {
                 break
             }
+            let _ = print("\n")
             let _ = print("self end: \(self.end.height)")
             let _ = print("obstacle width: \(obstacles.xEnd + obstacles.position.offsetX - (UIScreen.main.bounds.width/2)),\(obstacles.xStart + obstacles.position.offsetX - (UIScreen.main.bounds.width/2))")
-            let _ = print("obstacle height: \(obstacles.yEnd + obstacles.position.offsetY - (UIScreen.main.bounds.height/2)),\(obstacles.yStart + obstacles.position.offsetY - (UIScreen.main.bounds.height/2))")
+            let _ = print("phone height: \(-(UIScreen.main.bounds.height/2))")
+            let _ = print("obstacle height: \((UIScreen.main.bounds.height/2)-obstacles.yEnd - obstacles.position.offsetY),\((UIScreen.main.bounds.height/2) - obstacles.yStart - obstacles.position.offsetY)")
             if ((self.end.width <= obstacles.xEnd + obstacles.position.offsetX && self.end.width >= obstacles.xStart + obstacles.position.offsetX) &&
                 (self.end.height <= obstacles.yEnd + obstacles.position.offsetY && self.end.height >= obstacles.yStart + obstacles.position.offsetY)){
                 let _ = print("inside obstacle check")
