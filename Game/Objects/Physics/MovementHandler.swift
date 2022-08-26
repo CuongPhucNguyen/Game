@@ -41,14 +41,9 @@ class MovementHandler: Identifiable, Codable {
             if(collisionDetected) {
                 break
             }
-            let _ = print("\n")
-            let _ = print("self end: \(self.end.height)")
-            let _ = print("obstacle width: \(obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)),\(obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd-obstacles.xStart)/2))")
-            let _ = print("phone height: \(-(UIScreen.main.bounds.height/2))")
-            let _ = print("obstacle height: \(obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2)),\(obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2))")
-            if ((self.end.width <= obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2) && self.end.width >= obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd-obstacles.xStart)/2)) &&
-                (self.end.height <= obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2) && self.end.height >= obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2))){
-                let _ = print("inside obstacle check")
+            
+            if ((self.end.width <= obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2) && self.end.width >= obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)) &&
+                (self.end.height <= obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2) && self.end.height >= obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2))){
                 if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width <= obstacles.xEnd &&
                    self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width >= obstacles.xStart &&
                    self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacles.yEnd &&
