@@ -101,7 +101,6 @@ class PhysicsHandler: Codable{
                                                         second:
                                                             motion.end
                                                         )
-//                let _ = print("factor: .\(MovementHandler.getVector(current:factor.current,end:factor.end).height)")
             }
             
             
@@ -129,10 +128,52 @@ class PhysicsHandler: Codable{
                     dividedMotion.append(newMovement)
                     wallBounce = true
                 }
+                if (motion.checkCollision(environment: self.obstacles).top){
+                    let _ = print("top hit")
+                    dividedMotion.append(motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 200))
+                    let newMovement = MovementHandler.init(current:
+                                                            dividedMotion[dividedMotion.endIndex-1].end,
+                                                           end: MovementHandler.addVector(first:
+                                                                                            dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                          second:
+                                                                                            MovementHandler.getVector(current:
+                                                                                                                        motion.end,
+                                                                                                                      end: CGSize.init(width: (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width),
+                                                                                                                                       height:
+                                                                                                                                        (UIScreen.main.bounds.height/2) - 200
+                                                                                                                                      )
+                                                                                                                     )
+                                                                                         ),
+                                                           id: dividedMotion.endIndex)
+                    let _ = print("motion end .\(motion.end)")
+                    let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                    dividedMotion.append(newMovement)
+                    wallBounce = true
+                }
+                if (motion.checkCollision(environment: self.obstacles).sides){
+                    let _ = print("sides hit")
+                    dividedMotion.append(motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 200))
+                    let newMovement = MovementHandler.init(current:
+                                                            dividedMotion[dividedMotion.endIndex-1].end,
+                                                           end: MovementHandler.addVector(first:
+                                                                                            dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                          second:
+                                                                                            MovementHandler.getVector(current:
+                                                                                                                        motion.end,
+                                                                                                                      end: CGSize.init(width: (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width),
+                                                                                                                                       height:
+                                                                                                                                        (UIScreen.main.bounds.height/2) - 200
+                                                                                                                                      )
+                                                                                                                     )
+                                                                                         ),
+                                                           id: dividedMotion.endIndex)
+                    let _ = print("motion end .\(motion.end)")
+                    let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                    dividedMotion.append(newMovement)
+                    wallBounce = true
+                }
             }
             
-            //if(self.finalMovement.endIndex>0)
-            //let _ = print("self finalMovement: \(self.finalMovement[self.finalMovement.endIndex-1].end)")
             
             
             
