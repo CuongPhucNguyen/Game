@@ -34,27 +34,23 @@ class MovementHandler: Identifiable, Codable {
     func getHitbox()->CGSize{
         return CGSize.init(width: 4*(self.end.width-self.current.width)/abs(self.end.width-self.current.width) + self.end.width, height: 4*(self.end.height-self.current.height)/abs(self.end.height-self.current.height) + self.end.height)
     }
-    func checkCollision(environment: [EnvironmentObject])->[MovementHandler]{
-        var movements: [MovementHandler] = []
-        for obstacle in environment{
-            let newMovementA = MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.0), id: 0)
-            if (
-                (
-                    ((obstacle.xStart <= self.end.width)&&(obstacle.xStart >= self.current.width)) ||
-                    ((obstacle.xEnd <= self.end.width)&&(obstacle.xEnd >= self.current.width))
-                ) && (
-                    ((obstacle.yStart <= self.end.height)&&(obstacle.yStart >= self.current.height)) ||
-                    ((obstacle.yEnd <= self.end.height)&&(obstacle.yEnd >= self.current.height))
-                )
-            ){
-//                let calculatingMovementA = new 
-            }
-            
-            
-            
-        }
-        return movements
-    }
+//    func checkCollision(environment: [EnvironmentObject])->collisionArea{
+//        var collisionDetected = false
+//        var collisionSide = collisionArea.init()
+//        for obstacles in environment{
+//            if(collisionDetected) {
+//                break
+//            }
+//            if ((self.end.width <= obstacles.xEnd && self.end.width >= obstacles.xStart) &&
+//                (self.end.height <= obstacles.yEnd && self.end.height <= obstacles.yStart)){
+//                if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end)
+//                let checkFrontSide = self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX)
+//                let checkCeiling = self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetY)
+//                let checkFloor = self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetY)
+//                }
+//        }
+//        return collisionSide
+//    }
     
     
     
@@ -133,3 +129,9 @@ class MovementHandler: Identifiable, Codable {
     }
 }
 
+
+
+struct collisionArea{
+    var topBot: Bool = false
+    var sides: Bool = false
+}

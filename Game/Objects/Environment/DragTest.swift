@@ -63,14 +63,12 @@ struct DragTest: View {
     // how far the circle has been dragged
     @State var opacityHandler: Double = 100
     @State var physics: PhysicsHandler
-//    @State private var offset: [CGSize] = [CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero,CGSize.zero]
-    @State private var offset: CGSize = CGSize.zero
-    @State var accumulated: CGSize = CGSize.zero
-    @State var prevPos: CGSize = CGSize.zero
-    @State var prevMouse: CGSize = CGSize.zero
-    @State var currentMouse: CGSize = CGSize.zero
+    @State private var offset: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var accumulated: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var prevPos: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var prevMouse: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var currentMouse: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
     @State var onClick: Bool = false
-    @State var frames: [FrameRender] = []
     @State var changing: Bool = false
     @State var delayTimer: Double = 0.0
     @State var durationTimer: Double = 0.0
@@ -152,8 +150,17 @@ struct DragTest: View {
             
     }
     init(){
-        self.physics = PhysicsHandler.init(position: CGSize.zero)
+        self.physics = PhysicsHandler.init(position: CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250))
         physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.3), id: 1))
+        self.offset = physics.movement.current
+        self.accumulated = physics.movement.current
+        self.prevPos = physics.movement.current
+        self.prevMouse = physics.movement.current
+        self.currentMouse = physics.movement.current
+        self.onClick = false
+        self.changing = false
+        self.delayTimer = 0.0
+        self.durationTimer = 0.0
 //        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0001, height: 0.0), id: 1))
     }
 }
