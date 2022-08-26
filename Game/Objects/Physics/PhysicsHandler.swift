@@ -115,7 +115,7 @@ class PhysicsHandler: Codable{
                     let newMovement = MovementHandler.init(current:
                                                             motion.getParallelWith(width:
                                                                                    collisionCheck.collidedObstacle.xStart + collisionCheck.collidedObstacle.position.offsetX - (collisionCheck.collidedObstacle.xEnd - collisionCheck.collidedObstacle.xStart)/2
-                                                                                  ).end
+                                                                                  ).end,
                                                            end:
                                                             MovementHandler.addVector(first:
                                                                                         motion.getParallelWith(width:
@@ -124,7 +124,7 @@ class PhysicsHandler: Codable{
                                                                                       second:
                                                                                         MovementHandler.getVector(current:
                                                                                                                     motion.end,
-                                                                                                                  end: CGSize.init(width: collisionCheck.collidedObstacle.position.xStart,
+                                                                                                                  end: CGSize.init(width: collisionCheck.collidedObstacle.xStart,
                                                                                                                                    height:
                                                                                                                                     (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width)
                                                                                                                                   )
@@ -136,7 +136,7 @@ class PhysicsHandler: Codable{
                 }
                 if (collisionCheck.end){
                     let _ = print("end hit")
-                    dividedMotion.append(motion.getParallelWith(height: collisionCheck.collisionObstacle.xEnd))
+                    dividedMotion.append(motion.getParallelWith(height: collisionCheck.collidedObstacle.xEnd))
                     let newMovement = MovementHandler.init(current:
                                                             dividedMotion[dividedMotion.endIndex-1].end,
                                                            end: MovementHandler.addVector(first:
@@ -156,7 +156,7 @@ class PhysicsHandler: Codable{
                 }
                 if (collisionCheck.top){
                     let _ = print("top hit")
-                    dividedMotion.append(motion.getParallelWith(height: collisionCheck.collisionObstacle.yStart))
+                    dividedMotion.append(motion.getParallelWith(height: collisionCheck.collidedObstacle.yStart))
                     let newMovement = MovementHandler.init(current:
                                                             dividedMotion[dividedMotion.endIndex-1].end,
                                                            end: MovementHandler.addVector(first:
@@ -176,11 +176,11 @@ class PhysicsHandler: Codable{
                 }
                 if (collisionCheck.bottom){
                     let _ = print("bottom hit")
-                    dividedMotion.append(motion.getParallelWith( collisionCheck.collidedObstacle.yEnd + collisionCheck.collidedObstacle.position.offsetY - (collisionCheck.collidedObstacle.yEnd - collisionCheck.collidedObstacle.yEnd)/2))
+                    dividedMotion.append(motion.getParallelWith(height: collisionCheck.collidedObstacle.yEnd + collisionCheck.collidedObstacle.position.offsetY - (collisionCheck.collidedObstacle.yEnd - collisionCheck.collidedObstacle.yEnd)/2))
                     let newMovement = MovementHandler.init(current:
-                                                            motion.getParallelWith( collisionCheck.collidedObstacle.yEnd + collisionCheck.collidedObstacle.position.offsetY - (collisionCheck.collidedObstacle.yEnd - collisionCheck.collidedObstacle.yEnd)/2).end,
+                                                            motion.getParallelWith(height: collisionCheck.collidedObstacle.yEnd + collisionCheck.collidedObstacle.position.offsetY - (collisionCheck.collidedObstacle.yEnd - collisionCheck.collidedObstacle.yEnd)/2).end,
                                                            end: MovementHandler.addVector(first:
-                                                                                            motion.getParallelWith( collisionCheck.collidedObstacle.yEnd + collisionCheck.collidedObstacle.position.offsetY - (collisionCheck.collidedObstacle.yEnd - collisionCheck.collidedObstacle.yEnd)/2).end,
+                                                                                            motion.getParallelWith(height: collisionCheck.collidedObstacle.yEnd + collisionCheck.collidedObstacle.position.offsetY - (collisionCheck.collidedObstacle.yEnd - collisionCheck.collidedObstacle.yEnd)/2).end,
                                                                                           second:
                                                                                             MovementHandler.getVector(current:
                                                                                                                         motion.end,

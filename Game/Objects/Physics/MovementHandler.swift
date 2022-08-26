@@ -51,7 +51,7 @@ class MovementHandler: Identifiable, Codable {
                 )
                 {
                     collisionSide.collidedObstacle = obstacles
-                    collisionSide.sides = true;
+                    collisionSide.end = true;
                     collisionDetected = true;
                     continue;
                 }
@@ -62,7 +62,7 @@ class MovementHandler: Identifiable, Codable {
                 )
                 {
                     collisionSide.collidedObstacle = obstacles
-                    collisionSide.sides = true;
+                    collisionSide.start = true;
                     collisionDetected = true;
                     continue;
                 }
@@ -175,6 +175,7 @@ class MovementHandler: Identifiable, Codable {
 struct collisionArea{
     var top: Bool = false
     var bottom: Bool = false
-    var sides: Bool = false
-    var collidedObstacle: EnvironmentObject?
+    var start: Bool = false
+    var end: Bool = false
+    var collidedObstacle: EnvironmentObject = EnvironmentObject.init(xStart: 0, xEnd: 0, yStart: 0, yEnd: 0, id: 0, position: Position.init(offsetX: UIScreen.main.bounds.width, offsetY: UIScreen.main.bounds.height))
 }
