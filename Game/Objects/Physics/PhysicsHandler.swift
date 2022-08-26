@@ -75,7 +75,7 @@ class PhysicsHandler{
                                                 (dividedMovement.id == 0) ?
                                                 (dividedMovement.end)
                                                 :
-                                                (dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end),
+                                                (dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1])),
 //                                                (MovementHandler.addVector(first:
 //                                                                              MovementHandler.addVector(first:
 //                                                                                                          MovementHandler.getVector(current:
