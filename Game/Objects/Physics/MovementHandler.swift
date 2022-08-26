@@ -107,5 +107,8 @@ class MovementHandler: Identifiable {
                                                                  ),
                                     id: reference.id)
     }
+    func reverseVector()->MovementHandler{
+        return MovementHandler.init(current: self.end, end: self.current, id: self.id)
+    }
 }
 
