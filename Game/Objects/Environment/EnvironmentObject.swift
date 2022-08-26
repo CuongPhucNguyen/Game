@@ -29,7 +29,7 @@ struct EnvironmentObject: Identifiable, Codable {
 
 
 
-struct Position{
+struct Position: Codable{
     var offsetX: Double
     var offsetY: Double
 }

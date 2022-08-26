@@ -163,5 +163,20 @@ struct DragTest: View {
         self.durationTimer = 0.0
 //        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0001, height: 0.0), id: 1))
     }
+    init(obstacles: [EnvironmentObject]){
+        self.physics = PhysicsHandler.init(position: CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250))
+        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.3), id: 1))
+        self.offset = physics.movement.current
+        self.accumulated = physics.movement.current
+        self.prevPos = physics.movement.current
+        self.prevMouse = physics.movement.current
+        self.currentMouse = physics.movement.current
+        self.onClick = false
+        self.changing = false
+        self.delayTimer = 0.0
+        self.durationTimer = 0.0
+        physics.addObstacle(obstacles: obstacles)
+//        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0001, height: 0.0), id: 1))
+    }
 }
 

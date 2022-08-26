@@ -16,7 +16,7 @@ struct EnvironmentManager: View {
             ForEach(environmentObjectArray){ object in
                 Environment(environment: object)
             }
-            DragTest()
+            DragTest(obstacles: environmentObjectArray)
         }
     }
 }

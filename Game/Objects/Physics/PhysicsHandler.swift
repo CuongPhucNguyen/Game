@@ -105,7 +105,31 @@ class PhysicsHandler: Codable{
             }
             
             
-            
+            if (self.obstacles.endIndex > 0){
+                let _ = print("obstacle check")
+                if (motion.checkCollision(environment: self.obstacles).bottom){
+                    let _ = print("bot hit")
+                    dividedMotion.append(motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 200))
+                    let newMovement = MovementHandler.init(current:
+                                                            dividedMotion[dividedMotion.endIndex-1].end,
+                                                           end: MovementHandler.addVector(first:
+                                                                                            dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                          second:
+                                                                                            MovementHandler.getVector(current:
+                                                                                                                        motion.end,
+                                                                                                                      end: CGSize.init(width: (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width),
+                                                                                                                                       height:
+                                                                                                                                        (UIScreen.main.bounds.height/2) - 200
+                                                                                                                                      )
+                                                                                                                     )
+                                                                                         ),
+                                                           id: dividedMotion.endIndex)
+                    let _ = print("motion end .\(motion.end)")
+                    let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                    dividedMotion.append(newMovement)
+                    wallBounce = true
+                }
+            }
             
             
             

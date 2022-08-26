@@ -41,8 +41,12 @@ class MovementHandler: Identifiable, Codable {
             if(collisionDetected) {
                 break
             }
-            if ((self.end.width <= obstacles.xEnd && self.end.width >= obstacles.xStart) &&
-                (self.end.height <= obstacles.yEnd && self.end.height <= obstacles.yStart)){
+            let _ = print("self end: \(self.end.height)")
+            let _ = print("obstacle width: \(obstacles.xEnd + obstacles.position.offsetX - (UIScreen.main.bounds.width/2)),\(obstacles.xStart + obstacles.position.offsetX - (UIScreen.main.bounds.width/2))")
+            let _ = print("obstacle height: \(obstacles.yEnd + obstacles.position.offsetY - (UIScreen.main.bounds.height/2)),\(obstacles.yStart + obstacles.position.offsetY - (UIScreen.main.bounds.height/2))")
+            if ((self.end.width <= obstacles.xEnd + obstacles.position.offsetX && self.end.width >= obstacles.xStart + obstacles.position.offsetX) &&
+                (self.end.height <= obstacles.yEnd + obstacles.position.offsetY && self.end.height >= obstacles.yStart + obstacles.position.offsetY)){
+                let _ = print("inside obstacle check")
                 if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
                    self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width >= obstacles.xStart &&
                    self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
@@ -69,17 +73,17 @@ class MovementHandler: Identifiable, Codable {
                    self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.height >= obstacles.yStart
                 )
                 {
-                    collisionSide.topBot = true;
+                    collisionSide.bottom = true;
                     collisionDetected = true;
                     continue;
                 }
-                if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
-                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width >= obstacles.xStart &&
-                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
-                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height >= obstacles.yStart
+                if(self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.height >= obstacles.yStart
                 )
                 {
-                    collisionSide.topBot = true;
+                    collisionSide.top = true;
                     collisionDetected = true;
                     continue;
                 }
@@ -168,6 +172,7 @@ class MovementHandler: Identifiable, Codable {
 
 
 struct collisionArea{
-    var topBot: Bool = false
+    var top: Bool = false
+    var bottom: Bool = false
     var sides: Bool = false
 }
