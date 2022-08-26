@@ -75,32 +75,10 @@ class PhysicsHandler{
                                                 (dividedMovement.id == 0) ?
                                                 (dividedMovement.end)
                                                 :
-                                                (dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1])),
-//                                                (MovementHandler.addVector(first:
-//                                                                              MovementHandler.addVector(first:
-//                                                                                                          MovementHandler.getVector(current:
-//                                                                                                                                      self.movementDivided[dividedMovement.id-1].current,
-//                                                                                                                                    end:
-//                                                                                                                                        self.finalMovement[self.finalMovement.endIndex-1].end
-//                                                                                                                                   ),
-//                                                                                                        second:
-//                                                                                                          MovementHandler.getVector(current:
-//                                                                                                                                      self.movementDivided[dividedMovement.id-1].end,
-//                                                                                                                                    end:
-//                                                                                                                                        self.finalMovement[self.finalMovement.endIndex-1].end
-//                                                                                                                                   )
-//                                                                                                       ),
-//                                                                           second:
-//                                                                              dividedMovement.end
-//                                                                          )
-//                                              ),
+                                                (dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end),
                                               id: finalMovement.endIndex)
             motion.duration = 0.002
-            if (self.finalMovement.endIndex-1 > 0){
-                let _ = print("change direction: .\(dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end)")
-            }
             
-            var keepFactorTrack = 0.0
             for factor in self.otherFactor{
                 motion.end  = MovementHandler.addVector(first:
                                                             MovementHandler.getVector(current:
@@ -111,14 +89,8 @@ class PhysicsHandler{
                                                         second:
                                                             motion.end
                                                         )
-                let _ = print(keepFactorTrack)
-                keepFactorTrack+=factor.end.height
-
-
-
-
+//                let _ = print("factor: .\(MovementHandler.getVector(current:factor.current,end:factor.end).height)")
             }
-            let _ = print(motion.end)
             
             
             
@@ -243,80 +215,81 @@ class PhysicsHandler{
             
             
         
-//        while(!touchStop){
-//
-//
-//            let motion = MovementHandler.init(current: self.finalMovement[self.finalMovement.endIndex-1].end,
-//                                              end:
-//                                                MovementHandler.addVector(first:
-//                                                                            MovementHandler.addVector(first:
-//                                                                                                        MovementHandler.getVector(current:
-//                                                                                                                                    self.finalMovement[self.finalMovement.endIndex-1].current,
-//                                                                                                                                  end:
-//                                                                                                                                    self.finalMovement[self.finalMovement.endIndex-1].end
-//                                                                                                                                 ),
-//                                                                                                      second:
-//                                                                                                        MovementHandler.getVector(current:
-//                                                                                                                                    self.finalMovement[self.finalMovement.endIndex-1].current,
-//                                                                                                                                  end:
-//                                                                                                                                    self.finalMovement[self.finalMovement.endIndex-1].end
-//                                                                                                                                 )
-//                                                                                                     ),
-//                                                                          second:
-//                                                                            self.finalMovement[self.finalMovement.endIndex-1].end
-//                                                                         ),
-//                                              id: self.finalMovement.endIndex)
-//            for factor in self.otherFactor{
-//                motion.end  = MovementHandler.addVector(first:
-//                                                            MovementHandler.getVector(current:
-//                                                                                        factor.current,
-//                                                                                      end:
-//                                                                                        factor.end
-//                                                                                     ),
-//                                                        second:
-//                                                            motion.end
-//                                                        )
-//
-//
-//
-//
-//            }
-//            self.finalMovement.append(motion)
-//            if (self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 25){
-//                let _ = print("height: .\(self.finalMovement[self.finalMovement.endIndex-1].end.height)")
-//                let _ = print(UIScreen.main.bounds.height)
-//                self.finalMovement.removeLast()
-//                self.finalMovement[self.finalMovement.endIndex-1].end.height = (UIScreen.main.bounds.height/2) - 150
-//                touchStop = true
-//            }
-//            if ( self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2)  <= 0 + 25){
-//                let _ = print("height: .\(self.finalMovement[self.finalMovement.endIndex-1].end.height)")
-//                let _ = print(UIScreen.main.bounds.height)
-//                self.finalMovement.removeLast()
-//                self.finalMovement[self.finalMovement.endIndex-1].end.height = -(UIScreen.main.bounds.height/2) + 150
-//            }
-//            if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
-//                let _ = print("left")
-//                let _ = print(UIScreen.main.bounds.height)
-//                self.finalMovement.removeLast()
-//                self.finalMovement[self.finalMovement.endIndex-1].current.width = (UIScreen.main.bounds.width/2) - 10
-//                self.finalMovement[self.finalMovement.endIndex-1].end.width = (UIScreen.main.bounds.width/2) - 10
-//                continue
-//            }
-//            else if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
-//
-//                let _ = print("right")
-//                self.finalMovement.removeLast()
-//                self.finalMovement[self.finalMovement.endIndex-1].current.width = -(UIScreen.main.bounds.width/2) + 10
-//                self.finalMovement[self.finalMovement.endIndex-1].end.width = -(UIScreen.main.bounds.width/2) + 10
-//                continue
-//            }
-//            if (touchStop == true){
-//                break;
-//            }
-//
-//        }
+        while(!touchStop){
+
+
+            let motion = MovementHandler.init(current: self.finalMovement[self.finalMovement.endIndex-1].end,
+                                              end:
+                                                (self.finalMovement[self.finalMovement.endIndex-1].changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end),
+                                              id: self.finalMovement.endIndex)
+            for factor in self.otherFactor{
+                motion.end  = MovementHandler.addVector(first:
+                                                            MovementHandler.getVector(current:
+                                                                                        factor.current,
+                                                                                      end:
+                                                                                        factor.end
+                                                                                     ),
+                                                        second:
+                                                            motion.end
+                                                        )
+
+
+
+
+            }
+            self.finalMovement.append(motion)
+            if (self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 150){
+                let _ = print("height: .\(self.finalMovement[self.finalMovement.endIndex-1].end.height)")
+                let _ = print(UIScreen.main.bounds.height)
+                self.finalMovement.removeLast()
+                self.finalMovement[self.finalMovement.endIndex-1].end.height = (UIScreen.main.bounds.height/2) - 150
+                touchStop = true
+                return
+            }
+            if ( self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2)  <= 0 + 150){
+                let _ = print("height: .\(self.finalMovement[self.finalMovement.endIndex-1].end.height)")
+                let _ = print(UIScreen.main.bounds.height)
+                self.finalMovement.removeLast()
+                
+                //implement bounce against ceilling
+                
+                
+                
+                
+//                self.finalMovement[self.finalMovement.endIndex-1].getParallelWith(width: <#T##Double#>)
+//                self.finalMovement[self.finalMovement.endIndex-1].changeVectDirection(reference:)
+                
+                
+                
+                
+                touchStop = true
+            }
+            if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
+                let _ = print("left")
+                let _ = print(UIScreen.main.bounds.height)
+                self.finalMovement.removeLast()
+                self.finalMovement[self.finalMovement.endIndex-1].current.width = (UIScreen.main.bounds.width/2) - 10
+                self.finalMovement[self.finalMovement.endIndex-1].end.width = (UIScreen.main.bounds.width/2) - 10
+                continue
+            }
+            else if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
+
+                let _ = print("right")
+                self.finalMovement.removeLast()
+                self.finalMovement[self.finalMovement.endIndex-1].current.width = -(UIScreen.main.bounds.width/2) + 10
+                self.finalMovement[self.finalMovement.endIndex-1].end.width = -(UIScreen.main.bounds.width/2) + 10
+                continue
+            }
+            if (touchStop == true){
+                break;
+            }
+
+        }
     }
+    
+    
+    
+    
     func addFactor(factor: MovementHandler){
         self.otherFactor.append(factor)
     }

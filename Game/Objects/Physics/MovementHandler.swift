@@ -61,29 +61,45 @@ class MovementHandler: Identifiable {
     
     
     func getParallelWith(width: Double)->MovementHandler{
+//        let _ = print ("widthParallel self width: .\(self.end.width)")
+//        let _ = print ("widthParallel self height: .\(self.end.height)")
+//        let _ = print ("widthParallel width: .\(width)")
+//        let _ = print ("widthParallel height: .\(self.end.height*abs(width/self.end.width))")
+        var newVect = MovementHandler.getVector(current: self.current, end: self.end)
+        newVect.width = newVect.width*abs(width/self.end.width)
+        newVect.height = newVect.height*abs(width/self.end.width)
         return MovementHandler.init(current:
                                         self.current,
                                     end:
-                                        CGSize.init(width: width,
-                                                    height: self.end.height*(width/self.end.width)
-                                                   ),
-                                                    id: self.id)
+                                        MovementHandler.addVector(first: self.current, second: newVect),
+                                    id: self.id)
     }
-    func getParallelWith(height: Double)->MovementHandler{
-        return MovementHandler.init(current:
-                                        self.current,
-                                    end:
-                                        CGSize.init(width: self.end.width*(height/self.end.height),
-                                                    height: height
-                                                   ),
-                                                    id: self.id)
-    }
+//    func getParallelWith(height: Double)->MovementHandler{
+//        return MovementHandler.init(current:
+//                                        self.current,
+//                                    end:
+//                                        CGSize.init(width: self.end.width*(height/self.end.height),
+//                                                    height: height
+//                                                   ),
+//                                                    id: self.id)
+//    }
     func changeVectDirection(reference: MovementHandler){
         let vectMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: self.current, end: self.end))
         let refMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: reference.current, end: reference.end))
         let magnitudeDifference = vectMagnitude/refMagnitude
+        let referenceVect = MovementHandler.getVector(current: reference.current, end: reference.end)
         self.current = reference.end
-        self.end = MovementHandler.addVector(first: reference.getParallelWith(width: reference.end.width*magnitudeDifference).end, second: reference.end)
+        self.end = MovementHandler.addVector(first: reference.end,
+                                  second:
+                                    MovementHandler.getVector(current:
+                                                                reference.current,
+                                                              end:
+                                                                reference.getParallelWith(width:
+                                                                                            reference.current.width + referenceVect.width*magnitudeDifference
+                                                                                         ).end
+                                                             )
+                                    
+                                 )
     }
     func changeVectDirectionWithReturn(reference: MovementHandler) -> MovementHandler{
         let vectMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: self.current, end: self.end))
@@ -95,9 +111,7 @@ class MovementHandler: Identifiable {
                                         MovementHandler.addVector(first: reference.end,
                                                                   second:
                                                                     MovementHandler.getVector(current:
-                                                                                                reference.getParallelWith(width:
-                                                                                                                            reference.current.width + referenceVect.width*magnitudeDifference
-                                                                                                                         ).current,
+                                                                                                reference.current,
                                                                                               end:
                                                                                                 reference.getParallelWith(width:
                                                                                                                             reference.current.width + referenceVect.width*magnitudeDifference
