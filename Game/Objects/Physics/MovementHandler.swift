@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class MovementHandler: Identifiable {
+class MovementHandler: Identifiable, Codable {
     let id: Int
     var current: CGSize
     var end: CGSize
@@ -61,10 +61,6 @@ class MovementHandler: Identifiable {
     
     
     func getParallelWith(width: Double)->MovementHandler{
-//        let _ = print ("widthParallel self width: .\(self.end.width)")
-//        let _ = print ("widthParallel self height: .\(self.end.height)")
-//        let _ = print ("widthParallel width: .\(width)")
-//        let _ = print ("widthParallel height: .\(self.end.height*abs(width/self.end.width))")
         var newVect = MovementHandler.getVector(current: self.current, end: self.end)
         newVect.width = newVect.width*abs(width/self.end.width)
         newVect.height = newVect.height*abs(width/self.end.width)
@@ -74,15 +70,19 @@ class MovementHandler: Identifiable {
                                         MovementHandler.addVector(first: self.current, second: newVect),
                                     id: self.id)
     }
-//    func getParallelWith(height: Double)->MovementHandler{
-//        return MovementHandler.init(current:
-//                                        self.current,
-//                                    end:
-//                                        CGSize.init(width: self.end.width*(height/self.end.height),
-//                                                    height: height
-//                                                   ),
-//                                                    id: self.id)
-//    }
+    
+    func getParallelWith(height: Double)->MovementHandler{
+        var newVect = MovementHandler.getVector(current: self.current, end: self.end)
+        newVect.width = newVect.width*abs(height/self.end.height)
+        newVect.height = newVect.height*abs(height/self.end.height)
+        return MovementHandler.init(current:
+                                        self.current,
+                                    end:
+                                        MovementHandler.addVector(first: self.current, second: newVect),
+                                    id: self.id)
+    }
+    
+    
     func changeVectDirection(reference: MovementHandler){
         let vectMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: self.current, end: self.end))
         let refMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current: reference.current, end: reference.end))
@@ -120,6 +120,13 @@ class MovementHandler: Identifiable {
                                                                     
                                                                  ),
                                     id: reference.id)
+    }
+    func checkOutOfBound(){
+    }
+    func reverseMovement(){
+        let temp = self.end
+        self.end = self.current
+        self.current = temp
     }
     func reverseVector()->MovementHandler{
         return MovementHandler.init(current: self.end, end: self.current, id: self.id)

@@ -112,7 +112,7 @@ struct DragTest: View {
                                 offset = motion.end
                                 
                             }
-                            durationTimer += 0.002
+                            durationTimer += 0.00015
                             delayTimer += durationTimer
                         }
                         durationTimer = 0.0

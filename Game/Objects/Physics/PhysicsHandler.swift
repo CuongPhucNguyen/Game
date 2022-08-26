@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class PhysicsHandler{
+class PhysicsHandler: Codable{
     var otherFactor: [MovementHandler]
     var movementDivided: [MovementHandler]
     var finalMovement: [MovementHandler]
@@ -65,8 +65,9 @@ class PhysicsHandler{
     func applyFactor(){
         var touchStop = false
         var wallBounce = false
+        var dividedMotion: [MovementHandler] = []
         for dividedMovement in self.movementDivided{
-            var dividedMotion: [MovementHandler] = []
+            
             let motion = MovementHandler.init(current:
                                                 (dividedMovement.id == 0) ?
                                                 (dividedMovement.current):
@@ -95,118 +96,95 @@ class PhysicsHandler{
             
             
             
+            
+            
+            
+            
+            
+            
+            
+            
             //Adding bounce
             
-//            if (motion.end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 25){
-//
-//                let newMotionA = motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 150)
-//                newMotionA.duration = motion.duration*(
-//                    MovementHandler.getVector(current: motion.current, end: motion.end).height /
-//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).height
-//                )
-//                dividedMotion.append(newMotionA)
-//                let newMotionB = MovementHandler.init(current: newMotionA.end,
-//                                                      end:
-//                                                        CGSize.init(width:
-//                                                                        motion.end.width,
-//                                                                    height:
-//                                                                        (UIScreen.main.bounds.height - 25 - (motion.end.height + (UIScreen.main.bounds.height/2))) + newMotionA.end.height
-//                                                                    ),
-//                                                      id: newMotionA.id+1)
-//                newMotionB.duration = 0.002-newMotionA.duration
-//                dividedMotion.append(newMotionB)
-//
-//                self.finalMovement.append(contentsOf: dividedMotion)
-//                wallBounce = true;
-//            }
-//            if ( motion.end.height + (UIScreen.main.bounds.height/2)  <= 0 + 25){
-//
-//
-//                let newMotionA = motion.getParallelWith(height: -(UIScreen.main.bounds.height/2) + 150)
-//                newMotionA.duration = motion.duration*(
-//                    MovementHandler.getVector(current: motion.current, end: motion.end).height /
-//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).height
-//                )
-//                dividedMotion.append(newMotionA)
-//                let newMotionB = MovementHandler.init(current: newMotionA.end,
-//                                                      end:
-//                                                        CGSize.init(width:
-//                                                                        motion.end.width,
-//                                                                    height:
-//                                                                        (0 + 25 - (motion.end.height + (UIScreen.main.bounds.height/2))) + newMotionA.end.height
-//                                                                   ),
-//                                                      id: newMotionA.id+1)
-//                newMotionB.duration = 0.002-newMotionA.duration
-//                dividedMotion.append(newMotionB)
-//
-//                self.finalMovement.append(contentsOf: dividedMotion)
-//                wallBounce = true
-//            }
-//            if (motion.end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
-//
-//
-//                let _ = print("right")
-//                let _ = print((UIScreen.main.bounds.width/2) - 10)
-//                let _ = print(motion.end.width)
-//                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width)
-//
-//                let newMotionA = motion.getParallelWith(width: (UIScreen.main.bounds.width/2) - 10)
-//                newMotionA.duration = motion.duration*(
-//                    MovementHandler.getVector(current: motion.current, end: motion.end).width /
-//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).width
-//                )
-//                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width + newMotionA.end.width)
-//                dividedMotion.append(newMotionA)
-//                let newMotionB = MovementHandler.init(current: newMotionA.end,
-//                                                      end:
-//                                                        CGSize.init(width:
-//                                                                        ((UIScreen.main.bounds.width/2) - 10) - motion.end.width + newMotionA.end.width,
-//                                                                    height:
-//                                                                        motion.end.height
-//                                                                   ),
-//                                                      id: newMotionA.id+1)
-//                newMotionB.duration = 0.002-newMotionA.duration
-//                dividedMotion.append(newMotionB)
-//
-//                self.finalMovement.append(contentsOf: dividedMotion)
-//            }
-//            if (motion.end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
-//                let _ = print("left")
-//                let _ = print((UIScreen.main.bounds.width/2) - 10)
-//                let _ = print(motion.end.width)
-//                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width)
-//                let newMotionA = motion.getParallelWith(width: -(UIScreen.main.bounds.width/2) + 10)
-//                newMotionA.duration = motion.duration*(
-//                    MovementHandler.getVector(current: motion.current, end: motion.end).width /
-//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).width
-//                )
-//                dividedMotion.append(newMotionA)
-//                let newMotionB = MovementHandler.init(current: newMotionA.end,
-//                                                      end:
-//                                                        CGSize.init(width:
-//                                                                        (0 + 10 - (motion.end.width + (UIScreen.main.bounds.width/2)) + newMotionA.end.width),
-//                                                                    height:
-//                                                                        motion.end.height
-//                                                                   ),
-//                                                      id: newMotionA.id+1)
-//                newMotionB.duration = 0.002-newMotionA.duration
-//                dividedMotion.append(newMotionB)
-//
-//                self.finalMovement.append(contentsOf: dividedMotion)
-//            }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//            if (wallBounce){
-//                wallBounce = false
-//                continue
-//            }
+            if (motion.end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 200){
+                dividedMotion.append(motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 200))
+                let newMovement = MovementHandler.init(current:
+                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                       end: MovementHandler.addVector(first:
+                                                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                      second:
+                                                                                        MovementHandler.getVector(current:
+                                                                                                                    motion.end,
+                                                                                                                  end: CGSize.init(width: (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width),
+                                                                                                                                   height:
+                                                                                                                                    (UIScreen.main.bounds.height/2) - 200
+                                                                                                                                  )
+                                                                                                                 )
+                                                                                     ),
+                                                       id: dividedMotion.endIndex)
+                let _ = print("motion end .\(motion.end)")
+                let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                dividedMotion.append(newMovement)
+                wallBounce = true
+            }
+            if ( motion.end.height + (UIScreen.main.bounds.height/2)  <= 0 + 250){
+                dividedMotion.append(motion.getParallelWith(height: -(UIScreen.main.bounds.height/2) + 200))
+                let newMovement = MovementHandler.init(current:
+                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                       end: MovementHandler.addVector(first:
+                                                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                      second:
+                                                                                        MovementHandler.getVector(current:
+                                                                                                                    motion.end,
+                                                                                                                  end: CGSize.init(width: (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width),
+                                                                                                                                   height:
+                                                                                                                                    -(UIScreen.main.bounds.height/2) + 200
+                                                                                                                                  )
+                                                                                                                 )
+                                                                                     ),
+                                                       id: dividedMotion.endIndex)
+                let _ = print("motion end .\(motion.end)")
+                let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                dividedMotion.append(newMovement)
+                wallBounce = true
+            }
+            if (motion.end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
+            }
+            if (motion.end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
+                dividedMotion.append(motion.getParallelWith(width: -(UIScreen.main.bounds.width/2) + 30))
+                let newMovement = MovementHandler.init(current:
+                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                       end: MovementHandler.addVector(first:
+                                                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                      second:
+                                                                                        MovementHandler.getVector(current:
+                                                                                                                    motion.end,
+                                                                                                                  end: CGSize.init(width:-(UIScreen.main.bounds.width/2) + 30,
+                                                                                                                                   height:(motion.end.height*2 - dividedMotion[dividedMotion.endIndex-1].end.height)
+                                                                                                                                  )
+                                                                                                                 )
+                                                                                     ),
+                                                       id: dividedMotion.endIndex)
+                let _ = print("motion end .\(motion.end)")
+                let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                dividedMotion.append(newMovement)
+                wallBounce = true
+            }
+
+
+
+
+
+
+
+
+
+            if (wallBounce){
+                self.finalMovement.append(contentsOf: dividedMotion)
+                wallBounce = false
+                dividedMotion.removeAll()
+                continue
+            }
             self.finalMovement.append(motion)
             
             
@@ -238,46 +216,106 @@ class PhysicsHandler{
 
             }
             self.finalMovement.append(motion)
-            if (self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 150){
-                let _ = print("height: .\(self.finalMovement[self.finalMovement.endIndex-1].end.height)")
-                let _ = print(UIScreen.main.bounds.height)
+            if (self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 200){
+                let _ = print("up")
                 self.finalMovement.removeLast()
-                self.finalMovement[self.finalMovement.endIndex-1].end.height = (UIScreen.main.bounds.height/2) - 150
+                dividedMotion.append(self.finalMovement[self.finalMovement.endIndex-1].getParallelWith(height: (UIScreen.main.bounds.height/2) - 200))
+                let newMovement = MovementHandler.init(current:
+                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                       end: MovementHandler.addVector(first:
+                                                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                      second:
+                                                                                        MovementHandler.getVector(current:
+                                                                                                                    motion.end,
+                                                                                                                  end: CGSize.init(width: (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width),
+                                                                                                                                   height:
+                                                                                                                                    (UIScreen.main.bounds.height/2) - 200
+                                                                                                                                  )
+                                                                                                                 )
+                                                                                     ),
+                                                       id: dividedMotion.endIndex)
+                let _ = print("motion end .\(motion.end)")
+                let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                dividedMotion.append(newMovement)
+                self.finalMovement.append(contentsOf: dividedMotion)
+                dividedMotion.removeAll()
                 touchStop = true
                 return
             }
-            if ( self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2)  <= 0 + 150){
-                let _ = print("height: .\(self.finalMovement[self.finalMovement.endIndex-1].end.height)")
-                let _ = print(UIScreen.main.bounds.height)
+            if ( self.finalMovement[self.finalMovement.endIndex-1].end.height + (UIScreen.main.bounds.height/2)  <= 0 + 200){
+                let _ = print("up")
                 self.finalMovement.removeLast()
-                
-                //implement bounce against ceilling
-                
-                
-                
-                
-//                self.finalMovement[self.finalMovement.endIndex-1].getParallelWith(width: <#T##Double#>)
-//                self.finalMovement[self.finalMovement.endIndex-1].changeVectDirection(reference:)
-                
-                
-                
-                
-                touchStop = true
-            }
-            if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
-                let _ = print("left")
-                let _ = print(UIScreen.main.bounds.height)
-                self.finalMovement.removeLast()
-                self.finalMovement[self.finalMovement.endIndex-1].current.width = (UIScreen.main.bounds.width/2) - 10
-                self.finalMovement[self.finalMovement.endIndex-1].end.width = (UIScreen.main.bounds.width/2) - 10
+                dividedMotion.append(self.finalMovement[self.finalMovement.endIndex-1].getParallelWith(height: -(UIScreen.main.bounds.height/2) + 200))
+                let newMovement = MovementHandler.init(current:
+                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                       end: MovementHandler.addVector(first:
+                                                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                      second:
+                                                                                        MovementHandler.getVector(current:
+                                                                                                                    motion.end,
+                                                                                                                  end: CGSize.init(width: (motion.end.width*2 - dividedMotion[dividedMotion.endIndex-1].end.width),
+                                                                                                                                   height:
+                                                                                                                                    -(UIScreen.main.bounds.height/2) + 200
+                                                                                                                                  )
+                                                                                                                 )
+                                                                                     ),
+                                                       id: dividedMotion.endIndex)
+                let _ = print("motion end .\(motion.end)")
+                let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                dividedMotion.append(newMovement)
+                self.finalMovement.append(contentsOf: dividedMotion)
+                dividedMotion.removeAll()
                 continue
             }
-            else if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
-
+            if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 30){
+                
+                
                 let _ = print("right")
                 self.finalMovement.removeLast()
-                self.finalMovement[self.finalMovement.endIndex-1].current.width = -(UIScreen.main.bounds.width/2) + 10
-                self.finalMovement[self.finalMovement.endIndex-1].end.width = -(UIScreen.main.bounds.width/2) + 10
+                dividedMotion.append(self.finalMovement[self.finalMovement.endIndex-1].getParallelWith(width: (UIScreen.main.bounds.width/2) - 30))
+                let newMovement = MovementHandler.init(current:
+                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                       end: MovementHandler.addVector(first:
+                                                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                      second:
+                                                                                        MovementHandler.getVector(current:
+                                                                                                                    motion.end,
+                                                                                                                  end: CGSize.init(width: (UIScreen.main.bounds.width/2) - 30,
+                                                                                                                                   height:(motion.end.height*2 - dividedMotion[dividedMotion.endIndex-1].end.height)
+                                                                                                                                  )
+                                                                                                                 )
+                                                                                     ),
+                                                       id: dividedMotion.endIndex)
+                let _ = print("motion end .\(motion.end)")
+                let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                dividedMotion.append(newMovement)
+                self.finalMovement.append(contentsOf: dividedMotion)
+                dividedMotion.removeAll()
+                continue
+            }
+            else if (self.finalMovement[self.finalMovement.endIndex-1].end.width + (UIScreen.main.bounds.width/2)  < 0 + 30){
+
+                let _ = print("left")
+                self.finalMovement.removeLast()
+                dividedMotion.append(self.finalMovement[self.finalMovement.endIndex-1].getParallelWith(width: -(UIScreen.main.bounds.width/2) + 30))
+                let newMovement = MovementHandler.init(current:
+                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                       end: MovementHandler.addVector(first:
+                                                                                        dividedMotion[dividedMotion.endIndex-1].end,
+                                                                                      second:
+                                                                                        MovementHandler.getVector(current:
+                                                                                                                    motion.end,
+                                                                                                                  end: CGSize.init(width:-(UIScreen.main.bounds.width/2) + 30,
+                                                                                                                                   height:(motion.end.height*2 - dividedMotion[dividedMotion.endIndex-1].end.height)
+                                                                                                                                  )
+                                                                                                                 )
+                                                                                     ),
+                                                       id: dividedMotion.endIndex)
+                let _ = print("motion end .\(motion.end)")
+                let _ = print("newMovement .\(dividedMotion[dividedMotion.endIndex-1].end)")
+                dividedMotion.append(newMovement)
+                self.finalMovement.append(contentsOf: dividedMotion)
+                dividedMotion.removeAll()
                 continue
             }
             if (touchStop == true){
