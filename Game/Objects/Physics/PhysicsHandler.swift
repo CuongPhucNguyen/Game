@@ -75,23 +75,32 @@ class PhysicsHandler{
                                                 (dividedMovement.id == 0) ?
                                                 (dividedMovement.end)
                                                 :
-                                                (dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end
+                                                (dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end),
 //                                                (MovementHandler.addVector(first:
-//                                                                            MovementHandler.getVector(current:
-//                                                                                                        dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).current,
-//                                                                                                      end:
-//                                                                                                        dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end),
-//                                                                          second:
-//                                                                            dividedMovement.end
-//                                                                         )
-                                                ),
-                                              id: dividedMovement.id)
+//                                                                              MovementHandler.addVector(first:
+//                                                                                                          MovementHandler.getVector(current:
+//                                                                                                                                      self.movementDivided[dividedMovement.id-1].current,
+//                                                                                                                                    end:
+//                                                                                                                                        self.finalMovement[self.finalMovement.endIndex-1].end
+//                                                                                                                                   ),
+//                                                                                                        second:
+//                                                                                                          MovementHandler.getVector(current:
+//                                                                                                                                      self.movementDivided[dividedMovement.id-1].end,
+//                                                                                                                                    end:
+//                                                                                                                                        self.finalMovement[self.finalMovement.endIndex-1].end
+//                                                                                                                                   )
+//                                                                                                       ),
+//                                                                           second:
+//                                                                              dividedMovement.end
+//                                                                          )
+//                                              ),
+                                              id: finalMovement.endIndex)
             motion.duration = 0.002
             if (self.finalMovement.endIndex-1 > 0){
                 let _ = print("change direction: .\(dividedMovement.changeVectDirectionWithReturn(reference: self.finalMovement[self.finalMovement.endIndex-1]).end)")
             }
             
-            
+            var keepFactorTrack = 0.0
             for factor in self.otherFactor{
                 motion.end  = MovementHandler.addVector(first:
                                                             MovementHandler.getVector(current:
@@ -102,129 +111,130 @@ class PhysicsHandler{
                                                         second:
                                                             motion.end
                                                         )
-                
-                
-                
-                
+                let _ = print(keepFactorTrack)
+                keepFactorTrack+=factor.end.height
+
+
+
+
             }
+            let _ = print(motion.end)
             
             
             
             
             //Adding bounce
             
-            if (motion.end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 25){
-                
-                let newMotionA = motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 150)
-                newMotionA.duration = motion.duration*(
-                    MovementHandler.getVector(current: motion.current, end: motion.end).height /
-                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).height
-                )
-                dividedMotion.append(newMotionA)
-                let newMotionB = MovementHandler.init(current: newMotionA.end,
-                                                      end:
-                                                        CGSize.init(width:
-                                                                        motion.end.width,
-                                                                    height:
-                                                                        (UIScreen.main.bounds.height - 25 - (motion.end.height + (UIScreen.main.bounds.height/2))) + newMotionA.end.height
-                                                                    ),
-                                                      id: newMotionA.id+1)
-                newMotionB.duration = 0.002-newMotionA.duration
-                dividedMotion.append(newMotionB)
-                
-                self.finalMovement.append(contentsOf: dividedMotion)
-                wallBounce = true;
-            }
-            if ( motion.end.height + (UIScreen.main.bounds.height/2)  <= 0 + 25){
-                
-                
-                let newMotionA = motion.getParallelWith(height: -(UIScreen.main.bounds.height/2) + 150)
-                newMotionA.duration = motion.duration*(
-                    MovementHandler.getVector(current: motion.current, end: motion.end).height /
-                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).height
-                )
-                dividedMotion.append(newMotionA)
-                let newMotionB = MovementHandler.init(current: newMotionA.end,
-                                                      end:
-                                                        CGSize.init(width:
-                                                                        motion.end.width,
-                                                                    height:
-                                                                        (0 + 25 - (motion.end.height + (UIScreen.main.bounds.height/2))) + newMotionA.end.height
-                                                                   ),
-                                                      id: newMotionA.id+1)
-                newMotionB.duration = 0.002-newMotionA.duration
-                dividedMotion.append(newMotionB)
-                
-                self.finalMovement.append(contentsOf: dividedMotion)
-                wallBounce = true
-            }
-            if (motion.end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
-                
-                
-                let _ = print("right")
-                let _ = print((UIScreen.main.bounds.width/2) - 10)
-                let _ = print(motion.end.width)
-                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width)
-
-                let newMotionA = motion.getParallelWith(width: (UIScreen.main.bounds.width/2) - 10)
-                newMotionA.duration = motion.duration*(
-                    MovementHandler.getVector(current: motion.current, end: motion.end).width /
-                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).width
-                )
-                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width + newMotionA.end.width)
-                dividedMotion.append(newMotionA)
-                let newMotionB = MovementHandler.init(current: newMotionA.end,
-                                                      end:
-                                                        CGSize.init(width:
-                                                                        ((UIScreen.main.bounds.width/2) - 10) - motion.end.width + newMotionA.end.width,
-                                                                    height:
-                                                                        motion.end.height
-                                                                   ),
-                                                      id: newMotionA.id+1)
-                newMotionB.duration = 0.002-newMotionA.duration
-                dividedMotion.append(newMotionB)
-                
-                self.finalMovement.append(contentsOf: dividedMotion)
-            }
-            if (motion.end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
-                let _ = print("left")
-                let _ = print((UIScreen.main.bounds.width/2) - 10)
-                let _ = print(motion.end.width)
-                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width)
-                let newMotionA = motion.getParallelWith(width: -(UIScreen.main.bounds.width/2) + 10)
-                newMotionA.duration = motion.duration*(
-                    MovementHandler.getVector(current: motion.current, end: motion.end).width /
-                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).width
-                )
-                dividedMotion.append(newMotionA)
-                let newMotionB = MovementHandler.init(current: newMotionA.end,
-                                                      end:
-                                                        CGSize.init(width:
-                                                                        (0 + 10 - (motion.end.width + (UIScreen.main.bounds.width/2)) + newMotionA.end.width),
-                                                                    height:
-                                                                        motion.end.height
-                                                                   ),
-                                                      id: newMotionA.id+1)
-                newMotionB.duration = 0.002-newMotionA.duration
-                dividedMotion.append(newMotionB)
-                
-                self.finalMovement.append(contentsOf: dividedMotion)
-            }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            if (wallBounce){
-                wallBounce = false
-                continue
-            }
-            
-            let _ = print(motion.end)
+//            if (motion.end.height + (UIScreen.main.bounds.height/2) >= UIScreen.main.bounds.height - 25){
+//
+//                let newMotionA = motion.getParallelWith(height: (UIScreen.main.bounds.height/2) - 150)
+//                newMotionA.duration = motion.duration*(
+//                    MovementHandler.getVector(current: motion.current, end: motion.end).height /
+//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).height
+//                )
+//                dividedMotion.append(newMotionA)
+//                let newMotionB = MovementHandler.init(current: newMotionA.end,
+//                                                      end:
+//                                                        CGSize.init(width:
+//                                                                        motion.end.width,
+//                                                                    height:
+//                                                                        (UIScreen.main.bounds.height - 25 - (motion.end.height + (UIScreen.main.bounds.height/2))) + newMotionA.end.height
+//                                                                    ),
+//                                                      id: newMotionA.id+1)
+//                newMotionB.duration = 0.002-newMotionA.duration
+//                dividedMotion.append(newMotionB)
+//
+//                self.finalMovement.append(contentsOf: dividedMotion)
+//                wallBounce = true;
+//            }
+//            if ( motion.end.height + (UIScreen.main.bounds.height/2)  <= 0 + 25){
+//
+//
+//                let newMotionA = motion.getParallelWith(height: -(UIScreen.main.bounds.height/2) + 150)
+//                newMotionA.duration = motion.duration*(
+//                    MovementHandler.getVector(current: motion.current, end: motion.end).height /
+//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).height
+//                )
+//                dividedMotion.append(newMotionA)
+//                let newMotionB = MovementHandler.init(current: newMotionA.end,
+//                                                      end:
+//                                                        CGSize.init(width:
+//                                                                        motion.end.width,
+//                                                                    height:
+//                                                                        (0 + 25 - (motion.end.height + (UIScreen.main.bounds.height/2))) + newMotionA.end.height
+//                                                                   ),
+//                                                      id: newMotionA.id+1)
+//                newMotionB.duration = 0.002-newMotionA.duration
+//                dividedMotion.append(newMotionB)
+//
+//                self.finalMovement.append(contentsOf: dividedMotion)
+//                wallBounce = true
+//            }
+//            if (motion.end.width + (UIScreen.main.bounds.width/2) > UIScreen.main.bounds.width - 10){
+//
+//
+//                let _ = print("right")
+//                let _ = print((UIScreen.main.bounds.width/2) - 10)
+//                let _ = print(motion.end.width)
+//                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width)
+//
+//                let newMotionA = motion.getParallelWith(width: (UIScreen.main.bounds.width/2) - 10)
+//                newMotionA.duration = motion.duration*(
+//                    MovementHandler.getVector(current: motion.current, end: motion.end).width /
+//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).width
+//                )
+//                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width + newMotionA.end.width)
+//                dividedMotion.append(newMotionA)
+//                let newMotionB = MovementHandler.init(current: newMotionA.end,
+//                                                      end:
+//                                                        CGSize.init(width:
+//                                                                        ((UIScreen.main.bounds.width/2) - 10) - motion.end.width + newMotionA.end.width,
+//                                                                    height:
+//                                                                        motion.end.height
+//                                                                   ),
+//                                                      id: newMotionA.id+1)
+//                newMotionB.duration = 0.002-newMotionA.duration
+//                dividedMotion.append(newMotionB)
+//
+//                self.finalMovement.append(contentsOf: dividedMotion)
+//            }
+//            if (motion.end.width + (UIScreen.main.bounds.width/2)  < 0 + 10){
+//                let _ = print("left")
+//                let _ = print((UIScreen.main.bounds.width/2) - 10)
+//                let _ = print(motion.end.width)
+//                let _ = print((UIScreen.main.bounds.width/2) - 10 - motion.end.width)
+//                let newMotionA = motion.getParallelWith(width: -(UIScreen.main.bounds.width/2) + 10)
+//                newMotionA.duration = motion.duration*(
+//                    MovementHandler.getVector(current: motion.current, end: motion.end).width /
+//                    MovementHandler.getVector(current: newMotionA.current, end: newMotionA.end).width
+//                )
+//                dividedMotion.append(newMotionA)
+//                let newMotionB = MovementHandler.init(current: newMotionA.end,
+//                                                      end:
+//                                                        CGSize.init(width:
+//                                                                        (0 + 10 - (motion.end.width + (UIScreen.main.bounds.width/2)) + newMotionA.end.width),
+//                                                                    height:
+//                                                                        motion.end.height
+//                                                                   ),
+//                                                      id: newMotionA.id+1)
+//                newMotionB.duration = 0.002-newMotionA.duration
+//                dividedMotion.append(newMotionB)
+//
+//                self.finalMovement.append(contentsOf: dividedMotion)
+//            }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//            if (wallBounce){
+//                wallBounce = false
+//                continue
+//            }
             self.finalMovement.append(motion)
             
             
