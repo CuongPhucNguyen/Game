@@ -50,6 +50,7 @@ class MovementHandler: Identifiable, Codable {
                    self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacles.yStart
                 )
                 {
+                    collisionSide.collidedObstacle = obstacles
                     collisionSide.sides = true;
                     collisionDetected = true;
                     continue;
@@ -60,6 +61,7 @@ class MovementHandler: Identifiable, Codable {
                    self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacles.yStart
                 )
                 {
+                    collisionSide.collidedObstacle = obstacles
                     collisionSide.sides = true;
                     collisionDetected = true;
                     continue;
@@ -70,6 +72,7 @@ class MovementHandler: Identifiable, Codable {
                    self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacles.yStart
                 )
                 {
+                    collisionSide.collidedObstacle = obstacles
                     collisionSide.bottom = true;
                     collisionDetected = true;
                     continue;
@@ -80,6 +83,7 @@ class MovementHandler: Identifiable, Codable {
                    self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacles.yStart
                 )
                 {
+                    collisionSide.collidedObstacle = obstacles
                     collisionSide.top = true;
                     collisionDetected = true;
                     continue;
@@ -172,4 +176,5 @@ struct collisionArea{
     var top: Bool = false
     var bottom: Bool = false
     var sides: Bool = false
+    var collidedObstacle: EnvironmentObject?
 }
