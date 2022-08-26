@@ -34,23 +34,59 @@ class MovementHandler: Identifiable, Codable {
     func getHitbox()->CGSize{
         return CGSize.init(width: 4*(self.end.width-self.current.width)/abs(self.end.width-self.current.width) + self.end.width, height: 4*(self.end.height-self.current.height)/abs(self.end.height-self.current.height) + self.end.height)
     }
-//    func checkCollision(environment: [EnvironmentObject])->collisionArea{
-//        var collisionDetected = false
-//        var collisionSide = collisionArea.init()
-//        for obstacles in environment{
-//            if(collisionDetected) {
-//                break
-//            }
-//            if ((self.end.width <= obstacles.xEnd && self.end.width >= obstacles.xStart) &&
-//                (self.end.height <= obstacles.yEnd && self.end.height <= obstacles.yStart)){
-//                if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end)
-//                let checkFrontSide = self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX)
-//                let checkCeiling = self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetY)
-//                let checkFloor = self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetY)
-//                }
-//        }
-//        return collisionSide
-//    }
+    func checkCollision(environment: [EnvironmentObject])->collisionArea{
+        var collisionDetected = false
+        var collisionSide = collisionArea.init()
+        for obstacles in environment{
+            if(collisionDetected) {
+                break
+            }
+            if ((self.end.width <= obstacles.xEnd && self.end.width >= obstacles.xStart) &&
+                (self.end.height <= obstacles.yEnd && self.end.height <= obstacles.yStart)){
+                if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height >= obstacles.yStart
+                )
+                {
+                    collisionSide.sides = true;
+                    collisionDetected = true;
+                    continue;
+                }
+                if(self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.height >= obstacles.yStart
+                )
+                {
+                    collisionSide.sides = true;
+                    collisionDetected = true;
+                    continue;
+                }
+                if(self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.height >= obstacles.yStart
+                )
+                {
+                    collisionSide.topBot = true;
+                    collisionDetected = true;
+                    continue;
+                }
+                if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height >= obstacles.yStart
+                )
+                {
+                    collisionSide.topBot = true;
+                    collisionDetected = true;
+                    continue;
+                }
+            }
+        }
+        return collisionSide
+    }
     
     
     

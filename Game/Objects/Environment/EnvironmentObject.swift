@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-struct EnvironmentObject: Identifiable {
+struct EnvironmentObject: Identifiable, Codable {
     let id: Int
     var xStart: Double
     var xEnd: Double

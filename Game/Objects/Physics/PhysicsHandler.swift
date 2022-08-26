@@ -13,12 +13,23 @@ class PhysicsHandler: Codable{
     var movementDivided: [MovementHandler]
     var finalMovement: [MovementHandler]
     var movement: MovementHandler
+    var obstacles: [EnvironmentObject]
     init(position:CGSize) {
         self.movement = MovementHandler.init(current: position, end: position, id: 0)
         self.otherFactor = []
         self.movementDivided = []
         self.finalMovement = []
+        self.obstacles = []
     }
+    
+    
+    func addObstacle(obstacles: [EnvironmentObject]){
+        self.obstacles = obstacles
+    }
+    
+    
+    
+    
     func getMovement(count: Int){
         if (count < 20){
             //Add movement divider
