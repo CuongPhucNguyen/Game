@@ -46,43 +46,43 @@ class MovementHandler: Identifiable, Codable {
             let _ = print("obstacle width: \(obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)),\(obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd-obstacles.xStart)/2))")
             let _ = print("phone height: \(-(UIScreen.main.bounds.height/2))")
             let _ = print("obstacle height: \(obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2)),\(obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2))")
-            if ((self.end.width <= obstacles.xEnd + obstacles.position.offsetX && self.end.width >= obstacles.xStart + obstacles.position.offsetX) &&
-                (self.end.height <= obstacles.yEnd + obstacles.position.offsetY && self.end.height >= obstacles.yStart + obstacles.position.offsetY)){
+            if ((self.end.width <= obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2) && self.end.width >= obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd-obstacles.xStart)/2)) &&
+                (self.end.height <= obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2) && self.end.height >= obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd- obstacles.yStart)/2))){
                 let _ = print("inside obstacle check")
-                if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
-                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.width >= obstacles.xStart &&
-                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
-                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX).end.height >= obstacles.yStart
+                if(self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacles.yStart
                 )
                 {
                     collisionSide.sides = true;
                     collisionDetected = true;
                     continue;
                 }
-                if(self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
-                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.width >= obstacles.xStart &&
-                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
-                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX).end.height >= obstacles.yStart
+                if(self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacles.yStart
                 )
                 {
                     collisionSide.sides = true;
                     collisionDetected = true;
                     continue;
                 }
-                if(self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
-                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.width >= obstacles.xStart &&
-                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
-                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetX).end.height >= obstacles.yStart
+                if(self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacles.yStart
                 )
                 {
                     collisionSide.bottom = true;
                     collisionDetected = true;
                     continue;
                 }
-                if(self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.width <= obstacles.xEnd &&
-                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.width >= obstacles.xStart &&
-                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.height <= obstacles.yEnd &&
-                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX).end.height >= obstacles.yStart
+                if(self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.width <= obstacles.xEnd &&
+                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.width >= obstacles.xStart &&
+                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.height <= obstacles.yEnd &&
+                   self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacles.yStart
                 )
                 {
                     collisionSide.top = true;
