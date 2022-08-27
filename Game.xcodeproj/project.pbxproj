@@ -19,7 +19,6 @@
 		90A6A224289F644A00892261 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A223289F644A00892261 /* GameTests.swift */; };
 		90A6A22E289F644A00892261 /* GameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A22D289F644A00892261 /* GameUITests.swift */; };
 		90A6A230289F644A00892261 /* GameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A22F289F644A00892261 /* GameUITestsLaunchTests.swift */; };
-		90CC1FBF28B509B4001761E3 /* FrameRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CC1FBE28B509B4001761E3 /* FrameRender.swift */; };
 		90DBF43A28A25F0A00F9EF05 /* EnvironmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */; };
 		90DBF43C28A2624E00F9EF05 /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */; };
 		90DBF43E28A262F900F9EF05 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43D28A262F900F9EF05 /* Environment.swift */; };
@@ -58,7 +57,6 @@
 		90A6A229289F644A00892261 /* GameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A6A22D289F644A00892261 /* GameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUITests.swift; sourceTree = "<group>"; };
 		90A6A22F289F644A00892261 /* GameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		90CC1FBE28B509B4001761E3 /* FrameRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRender.swift; sourceTree = "<group>"; };
 		90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentObject.swift; sourceTree = "<group>"; };
 		90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		90DBF43D28A262F900F9EF05 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 		90A6A23C289F645E00892261 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				90CC1FBD28B50951001761E3 /* Viewer */,
 				9037B14F28AE5F2F00228214 /* Physics */,
 				90052685289F76100074898F /* Obstacles */,
 				90052684289F76080074898F /* Environment */,
@@ -208,14 +205,6 @@
 				90052682289F75E70074898F /* Player */,
 			);
 			path = Objects;
-			sourceTree = "<group>";
-		};
-		90CC1FBD28B50951001761E3 /* Viewer */ = {
-			isa = PBXGroup;
-			children = (
-				90CC1FBE28B509B4001761E3 /* FrameRender.swift */,
-			);
-			path = Viewer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,7 +339,6 @@
 			files = (
 				90DBF43A28A25F0A00F9EF05 /* EnvironmentObject.swift in Sources */,
 				90DBF43E28A262F900F9EF05 /* Environment.swift in Sources */,
-				90CC1FBF28B509B4001761E3 /* FrameRender.swift in Sources */,
 				90A6A215289F644800892261 /* ContentView.swift in Sources */,
 				9005268A289F76470074898F /* PlayerObject.swift in Sources */,
 				9005268D289F76830074898F /* DragTest.swift in Sources */,
