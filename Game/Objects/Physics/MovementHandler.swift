@@ -55,29 +55,32 @@ class MovementHandler: Identifiable, Codable {
                 
                 
                 
-                if((self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width == obstacleBoundsXEnd) &&
-                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacleBoundsYStart)
-                )
-                {
-                    collisionSide.collidedObstacle = obstacles
-                    collisionSide.end = true;
-                    collisionDetected = true;
-                    continue;
-                }
-                if((self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width == obstacleBoundsXStart) &&
-                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacleBoundsYStart)
-                )
-                {
-                    collisionSide.collidedObstacle = obstacles
-                    collisionSide.start = true;
-                    collisionDetected = true;
-                    continue;
-                }
+//                if((self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width <= obstacleBoundsXEnd) &&
+//                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width >= obstacleBoundsXStart) &&
+//                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacleBoundsYEnd) &&
+//                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacleBoundsYStart)
+//                )
+//                {
+//                    collisionSide.collidedObstacle = obstacles
+//                    collisionSide.end = true;
+//                    collisionDetected = true;
+//                    continue;
+//                }
+//                if((self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width <= obstacleBoundsXEnd) &&
+//                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width >= obstacleBoundsXStart) &&
+//                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacleBoundsYEnd) &&
+//                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacleBoundsYStart)
+//                )
+//                {
+//                    collisionSide.collidedObstacle = obstacles
+//                    collisionSide.start = true;
+//                    collisionDetected = true;
+//                    continue;
+//                }
                 if((self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width <= obstacleBoundsXEnd) &&
                    (self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width >= obstacleBoundsXStart) &&
-                   (self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height == obstacleBoundsYEnd)
+                   (self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height <= obstacleBoundsYEnd) &&
+                   (self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacleBoundsYStart)
                 )
                 {
                     collisionSide.collidedObstacle = obstacles
@@ -90,9 +93,10 @@ class MovementHandler: Identifiable, Codable {
                 let _ =  print(obstacleBoundsYEnd)
                 let _ =  print(obstacleBoundsYStart)
                 
-                if(self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.width <= obstacleBoundsXEnd &&
-                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.width >= obstacleBoundsXStart &&
-                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.height == obstacleBoundsYStart
+                if(self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width <= obstacleBoundsXEnd &&
+                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width >= obstacleBoundsXStart &&
+                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height <= obstacleBoundsYEnd &&
+                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacleBoundsYStart
                 )
                 {
                     collisionSide.collidedObstacle = obstacles
