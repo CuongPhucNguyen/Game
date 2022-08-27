@@ -35,13 +35,15 @@ class MovementHandler: Identifiable, Codable {
         return CGSize.init(width: 4*(self.end.width-self.current.width)/abs(self.end.width-self.current.width) + self.end.width, height: 4*(self.end.height-self.current.height)/abs(self.end.height-self.current.height) + self.end.height)
     }
     func checkCollision(environment: [EnvironmentObject])->collisionArea{
-        var collisionDetected = false
         var collisionSide = collisionArea.init()
-        var magnitude = 0.0
+        
+        
+        
+        
         for obstacles in environment{
-            if(collisionDetected) {
-                break
-            }
+            var magnitude = 0.0
+            
+            var tempMagnitude = 0.0
             
             let obstacleBoundsXStart = obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)
             
@@ -56,54 +58,60 @@ class MovementHandler: Identifiable, Codable {
                 
                 
                 
-                if((self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width <= obstacleBoundsXEnd) &&
-                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width >= obstacleBoundsXStart) &&
-                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(width: obstacles.xEnd + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacleBoundsYStart)
+                if((self.getParallelWith(width: obstacleBoundsXEnd)).end.width <= obstacleBoundsXEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXEnd)).end.width >= obstacleBoundsXStart) &&
+                   (self.getParallelWith(width: obstacleBoundsXEnd)).end.height <= obstacleBoundsYEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXEnd)).end.height >= obstacleBoundsYStart)
                 )
                 {
-                
-                    collisionSide.collidedObstacle = obstacles
+                    magnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundsXEnd).end))
+                    collisionSide.end = true
                     
                 }
-                if((self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width <= obstacleBoundsXEnd) &&
-                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.width >= obstacleBoundsXStart) &&
-                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(width: obstacles.xStart + obstacles.position.offsetX - ((obstacles.xEnd - obstacles.xStart)/2)).end.height >= obstacleBoundsYStart)
+                if((self.getParallelWith(width: obstacleBoundsXStart)).end.width <= obstacleBoundsXEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXStart)).end.width >= obstacleBoundsXStart) &&
+                   (self.getParallelWith(width: obstacleBoundsXStart)).end.height <= obstacleBoundsYEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXStart)).end.height >= obstacleBoundsYStart)
                 )
                 {
-                    collisionSide.collidedObstacle = obstacles
-                    collisionSide.start = true;
-                    collisionDetected = true;
-                    continue;
+                    tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundsXStart).end))
+                    if (tempMagnitude < magnitude){
+                        magnitude = tempMagnitude
+                        collisionSide.end = false
+                        collisionSide.start = true
+                    }
                 }
-                if((self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width <= obstacleBoundsXEnd) &&
-                   (self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width >= obstacleBoundsXStart) &&
-                   (self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(height: obstacles.yEnd + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacleBoundsYStart)
+                if((self.getParallelWith(height: obstacleBoundsYEnd)).end.width <= obstacleBoundsXEnd) &&
+                   (self.getParallelWith(height: obstacleBoundsYEnd)).end.width >= obstacleBoundsXStart) &&
+                   (self.getParallelWith(height: obstacleBoundsYEnd)).end.height <= obstacleBoundsYEnd) &&
+                   (self.getParallelWith(height: obstacleBoundsYEnd)).end.height >= obstacleBoundsYStart)
                 )
                 {
-                    collisionSide.collidedObstacle = obstacles
-                    collisionSide.bottom = true;
-                    collisionDetected = true;
-                    continue;
+                    tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundYEnd).end))
+                    if (tempMagnitude < magnitude){
+                        magnitude = tempMagnitude
+                        collisionSide.start = false
+                        collisionSide.bottom = true
+                    }
                 }
-                let _ = print(self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.width)
-                let _ = print(self.getParallelWith(width: obstacles.yStart + obstacles.position.offsetX - ((obstacles.yEnd - obstacles.yStart)/2)).end.height)
-                let _ =  print(obstacleBoundsYEnd)
-                let _ =  print(obstacleBoundsYStart)
                 
-                if(self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width <= obstacleBoundsXEnd &&
-                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.width >= obstacleBoundsXStart &&
-                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height <= obstacleBoundsYEnd &&
-                   self.getParallelWith(height: obstacles.yStart + obstacles.position.offsetY - ((obstacles.yEnd - obstacles.yStart)/2)).end.height >= obstacleBoundsYStart
+                if(self.getParallelWith(height: obstacleBoundsYStart)).end.width <= obstacleBoundsXEnd &&
+                   self.getParallelWith(height: obstacleBoundsYStart)).end.width >= obstacleBoundsXStart &&
+                   self.getParallelWith(height: obstacleBoundsYStart)).end.height <= obstacleBoundsYEnd &&
+                   self.getParallelWith(height: obstacleBoundsYStart)).end.height >= obstacleBoundsYStart
                 )
                 {
-                    collisionSide.collidedObstacle = obstacles
-                    collisionSide.top = true;
-                    collisionDetected = true;
-                    continue;
+                    tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundYStart).end))
+                    if (tempMagnitude < magnitude){
+                        magnitude = tempMagnitude
+                        collisionSide.bottom = false
+                        collisionSide.top = true
+                    }
                 }
+            }
+            if (collisionSide.end || collisionSide.start || collisionSide.bottom || collisionSide.top){
+                collisionSide.collidedObstacle = obstacles
+                break;
             }
         }
         return collisionSide
