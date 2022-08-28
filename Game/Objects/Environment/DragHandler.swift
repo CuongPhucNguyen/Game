@@ -259,7 +259,7 @@ struct DragHandler: View {
     }
     init(points: Binding<Int>, obstacles: [EnvironmentObject], pointBalls: Binding<PointBallHandler>, killHandler: Binding<KillBallHandler>, gameOver: Binding<Bool>){
         let playerPositionWidth = UserDefaults.standard.object(forKey: "currentPositionWidth") as? Double ?? 0.0
-        let playerPositionHeight = UserDefaults.standard.object(forKey: "currentPositionWidth") as? Double ?? (UIScreen.main.bounds.height/2 - 250)
+        let playerPositionHeight = UserDefaults.standard.object(forKey: "currentPositionHeight") as? Double ?? (UIScreen.main.bounds.height/2 - 250)
         let newPhysics = PhysicsHandler.init(position: CGSize.init(width: playerPositionWidth, height: playerPositionHeight))
         newPhysics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.3), id: 1))
         self.physics = newPhysics
