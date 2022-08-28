@@ -80,7 +80,7 @@ struct DragHandler: View {
     @State var startJumping = 0.0
     @State var jumping = 0.0
     @State var hitCount = 0
-    
+    @State var scores: Int = UserDefaults.standard.object(forKey: "scores") as? Int : nil
 
     // whether it is currently being dragged or not
     @State private var isDragging = false
@@ -142,6 +142,7 @@ struct DragHandler: View {
                                         hitCount += 1
                                         balls.added = true
                                         points += 1;
+                                        UserDefaults.standard.set(points, forKey: "scores")
                                         withAnimation(.linear.delay(delayTimer)){
                                             playSound(sound: "points", type: "mp3")
                                         }
@@ -179,6 +180,8 @@ struct DragHandler: View {
                             pointBalls.checkFair(score: points)
                             hitCount = 0
                         }
+                              
+                        UserDefaults.standard.set(offset, forKey: "currentPosition")
                         durationTimer = 0.0
                         delayTimer = 0.0
                         physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
