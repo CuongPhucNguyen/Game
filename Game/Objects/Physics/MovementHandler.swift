@@ -35,12 +35,14 @@ class MovementHandler: Identifiable, Codable {
         return CGSize.init(width: 4*(self.end.width-self.current.width)/abs(self.end.width-self.current.width) + self.end.width, height: 4*(self.end.height-self.current.height)/abs(self.end.height-self.current.height) + self.end.height)
     }
     func checkCollision(environment: [EnvironmentObject])->collisionArea{
-        var collisionSide = collisionArea.init()
+        
         
         
         
         
         for obstacles in environment{
+            var collisionSide = collisionArea.init()
+            
             var magnitude = 0.0
             
             var tempMagnitude = 0.0
@@ -58,20 +60,20 @@ class MovementHandler: Identifiable, Codable {
                 
                 
                 
-                if((self.getParallelWith(width: obstacleBoundsXEnd)).end.width <= obstacleBoundsXEnd) &&
-                   (self.getParallelWith(width: obstacleBoundsXEnd)).end.width >= obstacleBoundsXStart) &&
-                   (self.getParallelWith(width: obstacleBoundsXEnd)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(width: obstacleBoundsXEnd)).end.height >= obstacleBoundsYStart)
+                if((self.getParallelWith(width: obstacleBoundsXEnd).end.width <= obstacleBoundsXEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXEnd).end.width >= obstacleBoundsXStart) &&
+                   (self.getParallelWith(width: obstacleBoundsXEnd).end.height <= obstacleBoundsYEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXEnd).end.height >= obstacleBoundsYStart)
                 )
                 {
                     magnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundsXEnd).end))
                     collisionSide.end = true
                     
                 }
-                if((self.getParallelWith(width: obstacleBoundsXStart)).end.width <= obstacleBoundsXEnd) &&
-                   (self.getParallelWith(width: obstacleBoundsXStart)).end.width >= obstacleBoundsXStart) &&
-                   (self.getParallelWith(width: obstacleBoundsXStart)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(width: obstacleBoundsXStart)).end.height >= obstacleBoundsYStart)
+                if((self.getParallelWith(width: obstacleBoundsXStart).end.width <= obstacleBoundsXEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXStart).end.width >= obstacleBoundsXStart) &&
+                   (self.getParallelWith(width: obstacleBoundsXStart).end.height <= obstacleBoundsYEnd) &&
+                   (self.getParallelWith(width: obstacleBoundsXStart).end.height >= obstacleBoundsYStart)
                 )
                 {
                     tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundsXStart).end))
@@ -81,13 +83,13 @@ class MovementHandler: Identifiable, Codable {
                         collisionSide.start = true
                     }
                 }
-                if((self.getParallelWith(height: obstacleBoundsYEnd)).end.width <= obstacleBoundsXEnd) &&
-                   (self.getParallelWith(height: obstacleBoundsYEnd)).end.width >= obstacleBoundsXStart) &&
-                   (self.getParallelWith(height: obstacleBoundsYEnd)).end.height <= obstacleBoundsYEnd) &&
-                   (self.getParallelWith(height: obstacleBoundsYEnd)).end.height >= obstacleBoundsYStart)
+                if((self.getParallelWith(height: obstacleBoundsYEnd).end.width <= obstacleBoundsXEnd) &&
+                   (self.getParallelWith(height: obstacleBoundsYEnd).end.width >= obstacleBoundsXStart) &&
+                   (self.getParallelWith(height: obstacleBoundsYEnd).end.height <= obstacleBoundsYEnd) &&
+                   (self.getParallelWith(height: obstacleBoundsYEnd).end.height >= obstacleBoundsYStart)
                 )
                 {
-                    tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundYEnd).end))
+                    tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundsYEnd).end))
                     if (tempMagnitude < magnitude){
                         magnitude = tempMagnitude
                         collisionSide.start = false
@@ -95,26 +97,28 @@ class MovementHandler: Identifiable, Codable {
                     }
                 }
                 
-                if(self.getParallelWith(height: obstacleBoundsYStart)).end.width <= obstacleBoundsXEnd &&
-                   self.getParallelWith(height: obstacleBoundsYStart)).end.width >= obstacleBoundsXStart &&
-                   self.getParallelWith(height: obstacleBoundsYStart)).end.height <= obstacleBoundsYEnd &&
-                   self.getParallelWith(height: obstacleBoundsYStart)).end.height >= obstacleBoundsYStart
+                if(self.getParallelWith(height: obstacleBoundsYStart).end.width <= obstacleBoundsXEnd &&
+                   self.getParallelWith(height: obstacleBoundsYStart).end.width >= obstacleBoundsXStart &&
+                   self.getParallelWith(height: obstacleBoundsYStart).end.height <= obstacleBoundsYEnd &&
+                   self.getParallelWith(height: obstacleBoundsYStart).end.height >= obstacleBoundsYStart
                 )
                 {
-                    tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundYStart).end))
+                    tempMagnitude = MovementHandler.getDistant(vector: MovementHandler.getVector(current:self.current,end:self.getParallelWith(width: obstacleBoundsYStart).end))
                     if (tempMagnitude < magnitude){
                         magnitude = tempMagnitude
                         collisionSide.bottom = false
                         collisionSide.top = true
                     }
                 }
+                if (collisionSide.end || collisionSide.start || collisionSide.bottom || collisionSide.top){
+                    collisionSide.collidedObstacle = obstacles
+                    return collisionSide
+                }
+
             }
-            if (collisionSide.end || collisionSide.start || collisionSide.bottom || collisionSide.top){
-                collisionSide.collidedObstacle = obstacles
-                break;
-            }
+            
         }
-        return collisionSide
+        return collisionArea.init()
     }
     
     

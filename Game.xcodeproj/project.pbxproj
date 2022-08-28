@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		90052687289F76230074898F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90052686289F76230074898F /* Player.swift */; };
 		9005268A289F76470074898F /* PlayerObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90052689289F76470074898F /* PlayerObject.swift */; };
-		9005268D289F76830074898F /* DragTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9005268C289F76830074898F /* DragTest.swift */; };
+		9005268D289F76830074898F /* DragHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9005268C289F76830074898F /* DragHandler.swift */; };
 		9037B15128AE5F4400228214 /* PhysicsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9037B15028AE5F4400228214 /* PhysicsHandler.swift */; };
 		9037B15328AE607700228214 /* MovementHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9037B15228AE607700228214 /* MovementHandler.swift */; };
 		90A6A213289F644800892261 /* GameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A6A212289F644800892261 /* GameApp.swift */; };
@@ -22,6 +22,15 @@
 		90DBF43A28A25F0A00F9EF05 /* EnvironmentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */; };
 		90DBF43C28A2624E00F9EF05 /* EnvironmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */; };
 		90DBF43E28A262F900F9EF05 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DBF43D28A262F900F9EF05 /* Environment.swift */; };
+		90FA7A3328BB296D00B57175 /* KillBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FA7A3228BB296D00B57175 /* KillBall.swift */; };
+		90FA7A3528BB29C400B57175 /* PointBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FA7A3428BB29C400B57175 /* PointBall.swift */; };
+		90FA7A3728BB66FC00B57175 /* OnDeath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FA7A3628BB66FC00B57175 /* OnDeath.swift */; };
+		90FA7A3A28BB6BEC00B57175 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FA7A3928BB6BEC00B57175 /* UserDefault.swift */; };
+		90FA7A4028BB777E00B57175 /* You Failed!.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90FA7A3C28BB777E00B57175 /* You Failed!.mp3 */; };
+		90FA7A4128BB777E00B57175 /* Stardew Valley OST - Fall (Raven_s Descent).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90FA7A3D28BB777E00B57175 /* Stardew Valley OST - Fall (Raven_s Descent).mp3 */; };
+		90FA7A4228BB777E00B57175 /* Mario Coin Sound - Sound Effect (HD).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90FA7A3E28BB777E00B57175 /* Mario Coin Sound - Sound Effect (HD).mp3 */; };
+		90FA7A4328BB777E00B57175 /* Roblox OOF Sound Effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90FA7A3F28BB777E00B57175 /* Roblox OOF Sound Effect.mp3 */; };
+		90FA7A4528BB77DE00B57175 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FA7A4428BB77DE00B57175 /* SoundPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +53,7 @@
 /* Begin PBXFileReference section */
 		90052686289F76230074898F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		90052689289F76470074898F /* PlayerObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObject.swift; sourceTree = "<group>"; };
-		9005268C289F76830074898F /* DragTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragTest.swift; sourceTree = "<group>"; };
+		9005268C289F76830074898F /* DragHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragHandler.swift; sourceTree = "<group>"; };
 		9037B15028AE5F4400228214 /* PhysicsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsHandler.swift; sourceTree = "<group>"; };
 		9037B15228AE607700228214 /* MovementHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementHandler.swift; sourceTree = "<group>"; };
 		90A6A20F289F644800892261 /* Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +69,15 @@
 		90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentObject.swift; sourceTree = "<group>"; };
 		90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentManager.swift; sourceTree = "<group>"; };
 		90DBF43D28A262F900F9EF05 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		90FA7A3228BB296D00B57175 /* KillBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KillBall.swift; path = Game/KillBall.swift; sourceTree = SOURCE_ROOT; };
+		90FA7A3428BB29C400B57175 /* PointBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PointBall.swift; path = Game/PointBall.swift; sourceTree = SOURCE_ROOT; };
+		90FA7A3628BB66FC00B57175 /* OnDeath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDeath.swift; sourceTree = "<group>"; };
+		90FA7A3928BB6BEC00B57175 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		90FA7A3C28BB777E00B57175 /* You Failed!.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "You Failed!.mp3"; sourceTree = "<group>"; };
+		90FA7A3D28BB777E00B57175 /* Stardew Valley OST - Fall (Raven_s Descent).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Stardew Valley OST - Fall (Raven_s Descent).mp3"; sourceTree = "<group>"; };
+		90FA7A3E28BB777E00B57175 /* Mario Coin Sound - Sound Effect (HD).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mario Coin Sound - Sound Effect (HD).mp3"; sourceTree = "<group>"; };
+		90FA7A3F28BB777E00B57175 /* Roblox OOF Sound Effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Roblox OOF Sound Effect.mp3"; sourceTree = "<group>"; };
+		90FA7A4428BB77DE00B57175 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +124,11 @@
 		90052684289F76080074898F /* Environment */ = {
 			isa = PBXGroup;
 			children = (
-				9005268C289F76830074898F /* DragTest.swift */,
+				9005268C289F76830074898F /* DragHandler.swift */,
 				90DBF43928A25F0A00F9EF05 /* EnvironmentObject.swift */,
 				90DBF43B28A2624E00F9EF05 /* EnvironmentManager.swift */,
 				90DBF43D28A262F900F9EF05 /* Environment.swift */,
+				90FA7A3628BB66FC00B57175 /* OnDeath.swift */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -117,6 +136,8 @@
 		90052685289F76100074898F /* Obstacles */ = {
 			isa = PBXGroup;
 			children = (
+				90FA7A3228BB296D00B57175 /* KillBall.swift */,
+				90FA7A3428BB29C400B57175 /* PointBall.swift */,
 			);
 			path = Obstacles;
 			sourceTree = "<group>";
@@ -124,6 +145,8 @@
 		9005268B289F766A0074898F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				90FA7A3B28BB776E00B57175 /* Sounds */,
+				90FA7A3828BB6BD100B57175 /* DataSave */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -205,6 +228,26 @@
 				90052682289F75E70074898F /* Player */,
 			);
 			path = Objects;
+			sourceTree = "<group>";
+		};
+		90FA7A3828BB6BD100B57175 /* DataSave */ = {
+			isa = PBXGroup;
+			children = (
+				90FA7A3928BB6BEC00B57175 /* UserDefault.swift */,
+				90FA7A4428BB77DE00B57175 /* SoundPlayer.swift */,
+			);
+			path = DataSave;
+			sourceTree = "<group>";
+		};
+		90FA7A3B28BB776E00B57175 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				90FA7A3E28BB777E00B57175 /* Mario Coin Sound - Sound Effect (HD).mp3 */,
+				90FA7A3F28BB777E00B57175 /* Roblox OOF Sound Effect.mp3 */,
+				90FA7A3D28BB777E00B57175 /* Stardew Valley OST - Fall (Raven_s Descent).mp3 */,
+				90FA7A3C28BB777E00B57175 /* You Failed!.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,8 +354,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90FA7A4228BB777E00B57175 /* Mario Coin Sound - Sound Effect (HD).mp3 in Resources */,
 				90A6A21A289F644900892261 /* Preview Assets.xcassets in Resources */,
 				90A6A217289F644900892261 /* Assets.xcassets in Resources */,
+				90FA7A4028BB777E00B57175 /* You Failed!.mp3 in Resources */,
+				90FA7A4128BB777E00B57175 /* Stardew Valley OST - Fall (Raven_s Descent).mp3 in Resources */,
+				90FA7A4328BB777E00B57175 /* Roblox OOF Sound Effect.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,12 +388,17 @@
 				90DBF43E28A262F900F9EF05 /* Environment.swift in Sources */,
 				90A6A215289F644800892261 /* ContentView.swift in Sources */,
 				9005268A289F76470074898F /* PlayerObject.swift in Sources */,
-				9005268D289F76830074898F /* DragTest.swift in Sources */,
+				9005268D289F76830074898F /* DragHandler.swift in Sources */,
 				9037B15328AE607700228214 /* MovementHandler.swift in Sources */,
+				90FA7A3328BB296D00B57175 /* KillBall.swift in Sources */,
 				90052687289F76230074898F /* Player.swift in Sources */,
+				90FA7A3A28BB6BEC00B57175 /* UserDefault.swift in Sources */,
 				90DBF43C28A2624E00F9EF05 /* EnvironmentManager.swift in Sources */,
+				90FA7A4528BB77DE00B57175 /* SoundPlayer.swift in Sources */,
 				90A6A213289F644800892261 /* GameApp.swift in Sources */,
 				9037B15128AE5F4400228214 /* PhysicsHandler.swift in Sources */,
+				90FA7A3728BB66FC00B57175 /* OnDeath.swift in Sources */,
+				90FA7A3528BB29C400B57175 /* PointBall.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

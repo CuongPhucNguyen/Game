@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct GameApp: App {
+    @State var gameOver = false
     var body: some Scene {
         WindowGroup {
-            EnvironmentManager(environmentObjectArray: [EnvironmentObject.init(xStart: 0, xEnd: UIScreen.main.bounds.width, yStart: 0, yEnd: 100,id: 1, position: Position.init(offsetX: 0, offsetY: -150))])
+            EnvironmentManager(environmentObjectArray: [], gameOver: $gameOver)
         }
     }
 }
