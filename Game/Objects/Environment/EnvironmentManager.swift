@@ -19,13 +19,14 @@ struct EnvironmentManager: View {
     var body : some View {
         ZStack{
             
-            Rectangle()
-                .frame(width: UIScreen.main.bounds.width, height: 1000)
-                .offset(x: 0.0,y:(UIScreen.main.bounds.height/2 - 250))
+            
             Image("background")
                 .resizable()
                 .frame(height: UIScreen.main.bounds.height)
                 .ignoresSafeArea()
+            Rectangle()
+                .frame(width: UIScreen.main.bounds.width, height:250)
+                .offset(x: 0.0,y: UIScreen.main.bounds.height/2 - 250 + 64/2 + 250/2)
             ForEach(environmentObjectArray){ object in
                 Environment(environment: object)
             }
@@ -56,7 +57,6 @@ struct EnvironmentManager: View {
         }
         .onChange(of: gameOver){ value in
             backgroundMusic?.stop()
-            playFail(sound: "fail", type: "mp3")
         }
         
     }
@@ -77,6 +77,7 @@ struct EnvironmentManager: View {
         self.pointBalls = PointBallHandler.init()
         self._gameOver = gameOver
         killBalls.getPosition()
+        killBalls.checkFair(position: CGSize.init(width:0.0, height: (UIScreen.main.bounds.height/2 - 250)))
         pointBalls.getPosition()
         self.points = Int(0)
         self._gameOver = gameOver
