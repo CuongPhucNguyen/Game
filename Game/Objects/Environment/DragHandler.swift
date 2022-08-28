@@ -67,11 +67,16 @@ struct DragHandler: View {
     @Binding var gameOver: Bool
     @State var opacityHandler: Double = 100
     @State var physics: PhysicsHandler
-    @State private var offset: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
-    @State var accumulated: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
-    @State var prevPos: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
-    @State var prevMouse: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
-    @State var currentMouse: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    //@State private var offset: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State private var offset: CGSize
+    //@State var accumulated: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var accumulated: CGSize
+    //@State var prevPos: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var prevPos: CGSize
+    //@State var prevMouse: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var prevMouse: CGSize
+    //@State var currentMouse: CGSize = CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250)
+    @State var currentMouse: CGSize
     @State var onClick: Bool = false
     @State var changing: Bool = false
     @State var delayTimer: Double = 0.0
@@ -142,7 +147,6 @@ struct DragHandler: View {
                                         hitCount += 1
                                         balls.added = true
                                         points += 1;
-                                        UserDefaults.standard.set(points, forKey: "scores")
                                         withAnimation(.linear.delay(delayTimer)){
                                             playSound(sound: "points", type: "mp3")
                                         }
@@ -180,7 +184,7 @@ struct DragHandler: View {
                             pointBalls.checkFair(score: points)
                             hitCount = 0
                         }
-                              
+                        UserDefaults.standard.set(points, forKey: "scores")
                         UserDefaults.standard.set(Double(offset.width), forKey: "currentPositionWidth")
                         UserDefaults.standard.set(Double(offset.height), forKey: "currentPositionHeight")
                         UserDefaults.standard.synchronize()
@@ -249,6 +253,11 @@ struct DragHandler: View {
         let playerPositionHeight = UserDefaults.standard.double(forKey: "currentPositionHeight")
         let newPhysics = PhysicsHandler.init(position: CGSize.init(width: playerPositionWidth, height: (UIScreen.main.bounds.height/2 - 250)))
         newPhysics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.3), id: 1))
+        self.offset = newPhysics.movement.current
+        self.accumulated = newPhysics.movement.current
+        self.prevPos = newPhysics.movement.current
+        self.prevMouse = newPhysics.movement.current
+        self.currentMouse = newPhysics.movement.current
         self.physics = newPhysics
         self.onClick = false
         self.changing = false
