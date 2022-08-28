@@ -181,7 +181,7 @@ struct DragHandler: View {
                             hitCount = 0
                         }
                               
-                        UserDefaults.standard.set(offset, forKey: "currentPosition")
+                        UserDefaults.standard.set(PlayerPosition.init(width: offset.width, height: offset.height), forKey: "currentPosition")
                         durationTimer = 0.0
                         delayTimer = 0.0
                         physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
@@ -257,7 +257,7 @@ struct DragHandler: View {
 //        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0001, height: 0.0), id: 1))
     }
     init(points: Binding<Int>, obstacles: [EnvironmentObject], pointBalls: Binding<PointBallHandler>, killHandler: Binding<KillBallHandler>, gameOver: Binding<Bool>){
-        let newPhysics = PhysicsHandler.init(position: CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250))
+        let newPhysics = UserDefault.standard.object(forKey: "currentPosition") as? PlayerPosition ?? PhysicsHandler.init(position: CGSize.init(width: 0.0, height: (UIScreen.main.bounds.height/2)-250))
         newPhysics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.3), id: 1))
         self.physics = newPhysics
         self.onClick = false
