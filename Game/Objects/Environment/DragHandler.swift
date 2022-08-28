@@ -80,7 +80,7 @@ struct DragHandler: View {
     @State var startJumping = 0.0
     @State var jumping = 0.0
     @State var hitCount = 0
-    @State var scores: Int = UserDefaults.standard.object(forKey: "scores") as? Int : nil
+    @State var scores: Int = UserDefaults.standard.integer(forKey: "scores")
 
     // whether it is currently being dragged or not
     @State private var isDragging = false
