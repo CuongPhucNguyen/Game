@@ -142,9 +142,9 @@ struct DragHandler: View {
                                         hitCount += 1
                                         balls.added = true
                                         points += 1;
-                                        let _ = print(balls.position)
-                                        let _ = print(offset)
-                                        let _ = print(MovementHandler.getDistant(vector: MovementHandler.getVector(current: offset, end: balls.position)))
+                                        withAnimation(.linear.delay(delayTimer)){
+                                            playSound(sound: "points", type: "mp3")
+                                        }
                                         
                                     }
                                     
@@ -153,6 +153,7 @@ struct DragHandler: View {
                                 for kills in killBalls.positions{
                                     if (MovementHandler.getDistant(vector: MovementHandler.getVector(current: motion.end, end: kills.position)) <= 35.0 && !kills.added){
                                         death = true
+                                        playSound(sound: "oof", type: "mp3")
                                         break;
                                     }
                                 }

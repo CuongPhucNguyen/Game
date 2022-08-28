@@ -20,7 +20,7 @@ struct EnvironmentManager: View {
         ZStack{
             
             Rectangle()
-                .frame(width: UIScreen.main.bounds.width, height: 250)
+                .frame(width: UIScreen.main.bounds.width, height: 1000)
                 .offset(x: 0.0,y:(UIScreen.main.bounds.height/2 - 250))
             Image("background")
                 .resizable()
@@ -65,6 +65,7 @@ struct EnvironmentManager: View {
         killBalls.getPosition()
         killBalls.checkFair(position: CGSize.init(width:0.0, height: (UIScreen.main.bounds.height/2 - 250)))
         self.points = Int(0)
+        playSound(sound: "background", type: "mp3")
     }
     init(environmentObjectArray: [EnvironmentObject], gameOver: Binding<Bool>){
         self.environmentObjectArray = environmentObjectArray
@@ -75,6 +76,7 @@ struct EnvironmentManager: View {
         pointBalls.getPosition()
         self.points = Int(0)
         self._gameOver = gameOver
+        playSound(sound: "background", type: "mp3")
     }
 }
 
