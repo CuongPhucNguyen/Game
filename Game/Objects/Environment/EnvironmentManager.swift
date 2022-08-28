@@ -54,6 +54,9 @@ struct EnvironmentManager: View {
             Text("Points \(points)")
                 .offset(CGSize.init(width: 0.0, height:-(UIScreen.main.bounds.height/2) + 50))
         }
+        .onChange(of: gameOver){ value in
+                playBackground(sound: "fail", type: "mp3")
+        }
         
     }
     init(gameOver: Binding<Bool>){
@@ -65,7 +68,7 @@ struct EnvironmentManager: View {
         killBalls.getPosition()
         killBalls.checkFair(position: CGSize.init(width:0.0, height: (UIScreen.main.bounds.height/2 - 250)))
         self.points = Int(0)
-        playSound(sound: "background", type: "mp3")
+        playBackground(sound: "newBackground", type: "mp3")
     }
     init(environmentObjectArray: [EnvironmentObject], gameOver: Binding<Bool>){
         self.environmentObjectArray = environmentObjectArray
@@ -76,7 +79,7 @@ struct EnvironmentManager: View {
         pointBalls.getPosition()
         self.points = Int(0)
         self._gameOver = gameOver
-        playSound(sound: "background", type: "mp3")
+        playBackground(sound: "newBackground", type: "mp3")
     }
 }
 

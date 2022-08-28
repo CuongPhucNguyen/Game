@@ -14,5 +14,6 @@ struct GameApp: App {
         WindowGroup {
             EnvironmentManager(environmentObjectArray: [], gameOver: $gameOver)
         }
+        
     }
 }
