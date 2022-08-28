@@ -2,6 +2,8 @@ import AVFoundation
 
 var audioPlayer: AVAudioPlayer?
 var backgroundMusic: AVAudioPlayer?
+var failMusic: AVAudioPlayer?
+
 
 func playSound(sound: String, type: String) {
   if let path = Bundle.main.path(forResource: sound, ofType: type) {
@@ -26,3 +28,14 @@ func playBackground(sound: String, type: String) {
     }
   }
 }
+
+func playFail(sound: String, type: String) {
+    if let path = Bundle.main.path(forResource: sound, ofType: type) {
+      do {
+        failMusic = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+        failMusic?.play()
+      } catch {
+        print("ERROR: Could not find and play the sound file!")
+      }
+    }
+  }

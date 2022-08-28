@@ -55,7 +55,8 @@ struct EnvironmentManager: View {
                 .offset(CGSize.init(width: 0.0, height:-(UIScreen.main.bounds.height/2) + 50))
         }
         .onChange(of: gameOver){ value in
-                playBackground(sound: "fail", type: "mp3")
+            backgroundMusic?.stop()
+            playFail(sound: "fail", type: "mp3")
         }
         
     }
