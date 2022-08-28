@@ -2,7 +2,8 @@ import Foundation
 import SwiftUI
 
 class UsersData: Codable{
-  var currentPosition: PlayerPosition
+  var currentPositionWidth: Double
+  var currentPositionHeight: Double
   var scores: Int
   var pointBalls: PointBallHandler
   var killBalls: KillBallHandler
@@ -23,11 +24,4 @@ class PlayerData: Codable{
   var score: Int
 }
 
-class PlayerPosition: Codable{
-  var width: Double
-  var height: Double
-  init(width: Double, height: Double){
-    self.width = width
-    self.height = height
-  }
-}
+
