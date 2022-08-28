@@ -181,8 +181,9 @@ struct DragHandler: View {
                             hitCount = 0
                         }
                               
-                        UserDefaults.standard.set(Double(offset.width), forKey: "currentPositionWidth")
+                        UserDefaults.standard.set(Double(offset.width), forKey defaultName: "currentPositionWidth")
                         UserDefaults.standard.set(Double(offset.height), forKey: "currentPositionHeight")
+                        UserDefault.synchronize()
                         durationTimer = 0.0
                         delayTimer = 0.0
                         physics.movement.current = physics.finalMovement[physics.finalMovement.endIndex-1].end
