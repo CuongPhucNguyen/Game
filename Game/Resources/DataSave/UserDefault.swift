@@ -6,6 +6,7 @@
 
 
 import Foundation
+import SwiftUI
 
 //decoder and encoder for use when saving and loading continueGame object from UserDefault
 let decoder = JSONDecoder()
