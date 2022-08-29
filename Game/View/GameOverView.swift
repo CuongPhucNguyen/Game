@@ -1,9 +1,14 @@
-//
-//  GameOverView.swift
-//  Game
-//
-//  Created by Cuong Nguyen Phuc on 29/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Nguyen Phuc Cuong
+ ID: s3881006
+ Created  date: 24/08/2022
+ Last modified: 28/08/2022
+ */
+
 
 import Foundation
 import SwiftUI
@@ -28,21 +33,6 @@ struct GameOverView : View {
                     gameOver = false
                     gameView = false
                     highscores[name] = points
-                    var newScoreList: [String:Int] = [:]
-                    var count = 0
-                    if (highscores.count >= 10){
-                        count = 0
-                        for scores in highscores{
-                            if (count == 9){
-                                break
-                            }
-                            if (count == 0){
-                                newScoreList[name] = points
-                            }
-                            newScoreList[scores.key] = scores.value
-                            count += 1
-                        }
-                    }
                     highscores[name] = points
                     UserDefaults.standard.set(highscores,forKey: "highscores")
                     UserDefaults.standard.set(0, forKey: "scores")

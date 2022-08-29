@@ -1,9 +1,14 @@
-//
-//  LeaderBoardView.swift
-//  Game
-//
-//  Created by Cuong Nguyen Phuc on 29/08/2022.
-//
+/*
+ RMIT University Vietnam
+ Course: COSC2659 iOS Development
+ Semester: 2022B
+ Assessment: Assignment 2
+ Author: Nguyen Phuc Cuong
+ ID: s3881006
+ Created  date: 26/08/2022
+ Last modified: 28/08/2022
+ */
+
 
 import Foundation
 import SwiftUI
