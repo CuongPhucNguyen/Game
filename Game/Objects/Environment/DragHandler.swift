@@ -61,6 +61,7 @@ struct DragHandler: View {
     */
     
     // how far the circle has been dragged
+    @Binding var easyMode: Bool
     @Binding var pointBalls: PointBallHandler
     @Binding var killBalls: KillBallHandler
     @Binding var points: Int
@@ -147,6 +148,12 @@ struct DragHandler: View {
                                         hitCount += 1
                                         balls.added = true
                                         points += 1;
+                                        if let killBallsData = try? encoder.encode(killBalls){
+                                            UserDefaults.standard.set(killBallsData, forKey:"killBalls")
+                                        }
+                                        if let pointBallsData = try? encoder.encode(pointBalls){
+                                            UserDefaults.standard.set(pointBallsData, forKey:"pointBalls")
+                                        }
                                         withAnimation(.linear.delay(delayTimer)){
                                             playSound(sound: "points", type: "mp3")
                                         }
@@ -168,6 +175,7 @@ struct DragHandler: View {
                             }
                             if (death){
                                 gameOver = true
+                                death = false
                                 break
                             }
                             
@@ -183,6 +191,12 @@ struct DragHandler: View {
                             killBalls.checkFair(score: points)
                             pointBalls.checkFair(score: points)
                             hitCount = 0
+                            if let killBallsData = try? encoder.encode(killBalls){
+                                UserDefaults.standard.set(killBallsData, forKey:"killBalls")
+                            }
+                            if let pointBallsData = try? encoder.encode(pointBalls){
+                                UserDefaults.standard.set(pointBallsData, forKey:"pointBalls")
+                            }
                         }
                         UserDefaults.standard.set(points, forKey: "scores")
                         UserDefaults.standard.set(Double(offset.width), forKey: "currentPositionWidth")
@@ -229,7 +243,7 @@ struct DragHandler: View {
                             .frame(width: 64, height: 64)
                             .scaleEffect(0.2)
                             .offset(position.end)
-                            .opacity(isDragging ? 0.5 : 0.0)
+                            .opacity((easyMode) ? (isDragging ? 0.5 : 0.0) : 0.0)
                     }
                 }
                 
@@ -248,11 +262,11 @@ struct DragHandler: View {
         
             
     }
-    init(points: Binding<Int>, pointsHandler: Binding<PointBallHandler>, killHandler: Binding<KillBallHandler>, gameOver: Binding<Bool>){
+    init(points: Binding<Int>, pointsHandler: Binding<PointBallHandler>, killHandler: Binding<KillBallHandler>, gameOver: Binding<Bool>, easyMode: Binding<Bool>){
         let playerPositionWidth = UserDefaults.standard.double(forKey: "currentPositionWidth")
-        let playerPositionHeight = UserDefaults.standard.double(forKey: "currentPositionHeight")
         let newPhysics = PhysicsHandler.init(position: CGSize.init(width: playerPositionWidth, height: (UIScreen.main.bounds.height/2 - 250)))
         newPhysics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.3), id: 1))
+        self._easyMode = easyMode
         self.offset = newPhysics.movement.current
         self.accumulated = newPhysics.movement.current
         self.prevPos = newPhysics.movement.current
@@ -269,11 +283,16 @@ struct DragHandler: View {
         self._gameOver = gameOver
 //        physics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0001, height: 0.0), id: 1))
     }
-    init(points: Binding<Int>, obstacles: [EnvironmentObject], pointBalls: Binding<PointBallHandler>, killHandler: Binding<KillBallHandler>, gameOver: Binding<Bool>){
+    init(points: Binding<Int>, obstacles: [EnvironmentObject], pointBalls: Binding<PointBallHandler>, killHandler: Binding<KillBallHandler>, gameOver: Binding<Bool>, easyMode: Binding<Bool>){
         let playerPositionWidth = UserDefaults.standard.double(forKey: "currentPositionWidth")
-        let playerPositionHeight = UserDefaults.standard.double(forKey: "currentPositionHeight")
         let newPhysics = PhysicsHandler.init(position: CGSize.init(width: playerPositionWidth, height: (UIScreen.main.bounds.height/2 - 250)))
         newPhysics.addFactor(factor: MovementHandler.init(current: CGSize.init(width: 0.0, height: 0.0), end: CGSize.init(width: 0.0, height: 0.3), id: 1))
+        self._easyMode = easyMode
+        self.offset = newPhysics.movement.current
+        self.accumulated = newPhysics.movement.current
+        self.prevPos = newPhysics.movement.current
+        self.prevMouse = newPhysics.movement.current
+        self.currentMouse = newPhysics.movement.current
         self.physics = newPhysics
         self.onClick = false
         self.changing = false
