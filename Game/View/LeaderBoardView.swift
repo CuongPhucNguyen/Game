@@ -10,24 +10,29 @@ import SwiftUI
 
 struct LeaderBoardView : View {
     @Binding var leaderboardView: Bool
-    @Binding var highscore = UserDefaults.standard.object(forKey: "highscores") as? [String:Int] ?? [:]
+    @Binding var highscore: [String:Int]
     var body: some View{
         ZStack{
             Rectangle()
                 .frame(width:UIScreen.main.bounds.width, height:UIScreen.main.bounds.height)
                 .foregroundColor(.cyan)
             VStack{
-                ForEach(highscores.sorted(by: >), id: \.key) { key, value in
+                ForEach(highscore.sorted(by: >), id: \.key) { key, value in
                     ZStack{
                         Rectangle()
-                            .frame(width: 105, height: 55)
+                            .frame(width: UIScreen.main.bounds.width, height: 55)
                             .foregroundColor(.gray)
                         Rectangle()
-                            .frame(width: 100, height: 50)
+                            .frame(width: UIScreen.main.bounds.width, height: 50)
                             .foregroundColor(.white)
                         HStack{
-                            Text("\(key)")
-                            Text("\(value)")
+                            Spacer()
+                                .frame(width: 10)
+                            Text("Name: \(key)")
+                            Spacer()
+                            Text("Score: \(value)")
+                            Spacer()
+                                .frame(width: 10)
                         }
                     }
                 }
@@ -48,5 +53,6 @@ struct LeaderBoardView : View {
     }
     init(LeaderBoardView: Binding<Bool>, highscore: Binding<[String:Int]>){
         self._leaderboardView = LeaderBoardView
+        self._highscore = highscore
     }
 }

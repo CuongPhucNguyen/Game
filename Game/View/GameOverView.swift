@@ -13,7 +13,7 @@ struct GameOverView : View {
     @Binding var gameOver: Bool
     @Binding var gameView: Bool
     @Binding var points: Int
-    @State var highscores = UserDefaults.standard.object(forKey: "highscores") as? [String: Int] ?? [:]
+    @Binding var highscores: [String:Int]
     @State var name: String = ""
     var body: some View{
         ZStack{
@@ -30,10 +30,7 @@ struct GameOverView : View {
                     highscores[name] = points
                     var newScoreList: [String:Int] = [:]
                     var count = 0
-                    for _ in highscores{
-                        count += 1
-                    }
-                    if (count >= 10){
+                    if (highscores.count >= 10){
                         count = 0
                         for scores in highscores{
                             if (count == 9){
@@ -46,17 +43,20 @@ struct GameOverView : View {
                             count += 1
                         }
                     }
-                    UserDefaults.standard.set(newScoreList,forKey: "highscores")
+                    highscores[name] = points
+                    UserDefaults.standard.set(highscores,forKey: "highscores")
                     UserDefaults.standard.set(0, forKey: "scores")
                     UserDefaults.standard.set(0, forKey: "currentPositionWidth")
                     UserDefaults.standard.set(-(UIScreen.main.bounds.height/2 - 250), forKey: "currentPositionHeight")
+                    points = 0
                 }
             }
         }
     }
-    init(gameOver: Binding<Bool>, gameView: Binding<Bool>, points: Binding<Int>){
+    init(gameOver: Binding<Bool>, gameView: Binding<Bool>, points: Binding<Int>, highscores: Binding<[String:Int]>){
         self._gameOver = gameOver
         self._gameView = gameView
         self._points = points
+        self._highscores = highscores
     }
 }

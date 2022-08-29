@@ -16,6 +16,7 @@ struct GameApp: App {
     @State var howToPlayView = false
     @State var easyMode = true
     @State var points = 0
+    @State var highscore = UserDefaults.standard.object(forKey: "highscores") as? [String:Int] ?? [:]
     var body: some Scene {
         WindowGroup {
             ZStack{
@@ -33,10 +34,10 @@ struct GameApp: App {
                     EnvironmentManager(environmentObjectArray: [], gameOver: $gameOver, gameView: $gameView, easyMode: $easyMode, points: $points)
                 }
                 if (leaderboardView){
-                    LeaderBoardView(LeaderBoardView: $leaderboardView)
+                    LeaderBoardView(LeaderBoardView: $leaderboardView, highscore: $highscore)
                 }
                 if (gameOver){
-                    GameOverView(gameOver: $gameOver, gameView: $gameView, points: $points)
+                    GameOverView(gameOver: $gameOver, gameView: $gameView, points: $points, highscores: $highscore)
                 }
             }
         }
