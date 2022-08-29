@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LeaderBoardView : View {
     @Binding var leaderboardView: Bool
-    @State var highscores = UserDefaults.standard.object(forKey: "highscores") as? [String:Int] ?? [:]
+    @Binding var highscore = UserDefaults.standard.object(forKey: "highscores") as? [String:Int] ?? [:]
     var body: some View{
         ZStack{
             Rectangle()
@@ -46,7 +46,7 @@ struct LeaderBoardView : View {
         }
         
     }
-    init(LeaderBoardView: Binding<Bool>){
+    init(LeaderBoardView: Binding<Bool>, highscore: Binding<[String:Int]>){
         self._leaderboardView = LeaderBoardView
     }
 }
